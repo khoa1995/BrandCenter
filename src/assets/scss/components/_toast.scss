@@ -1,0 +1,55 @@
+/*
+*  Toast components.
+*
+*  [Table of contents]
+*
+*  [&. Content / #key]
+*  [Let press Ctrl + f and type of paste the key, then press Enter to search the content]
+*
+*  Summary:
+*
+*  01. General
+*
+*/
+
+
+/*===================================
+=            01. General            =
+===================================*/
+
+// b-toaster
+// b-toaster-slot
+// b-toast
+// toast bc-toast
+// toast-header | toast-body
+.b-toaster.b-toaster-top-left .b-toaster-slot,
+.b-toaster.b-toaster-top-right .b-toaster-slot,
+.b-toaster.b-toaster-top-center .b-toaster-slot,
+.b-toast,
+.bc-toast {
+  max-width: 25rem;
+}
+
+.bc-toast {
+  .toast-header {
+    position: relative;
+    border-bottom: 0;
+    padding: 0.5rem 2rem;
+    strong {
+      font-weight: 400;
+      margin-right: 0!important;
+    }
+  }
+  .close {
+    float: none;
+    position: absolute;
+    top: 0.25rem;
+    right: 0.5rem;
+  }
+}
+
+.b-toast .bc-toast .toast-body {
+  display: none;
+}
+
+/*=====  End of 01. General  ======*/

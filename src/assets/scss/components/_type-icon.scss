@@ -1,0 +1,30 @@
+/*
+*  Type Icon components.
+*
+*  [Table of contents]
+*
+*  [&. Content / #key]
+*  [Let press Ctrl + f and type of paste the key, then press Enter to search the content]
+*
+*  Summary:
+*
+*  01. General
+*
+*/
+
+
+/*===================================
+=            01. General            =
+===================================*/
+
+.bc-type-icon {
+  min-width: 2.25rem;
+  min-height: 2.25rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.25rem;
+  color: $color-white;
+}
+
+/*=====  End of 01. General  ======*/

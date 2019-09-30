@@ -1,0 +1,104 @@
+/*
+*  Button components.
+*
+*  [Table of contents]
+*
+*  [&. Content / #key]
+*  [Let press Ctrl + f and type of paste the key, then press Enter to search the content]
+*
+*  Summary:
+*
+*  01. General
+*  02. Override b-button
+*
+*/
+
+
+/*===================================
+=            01. General            =
+===================================*/
+
+.bc-button {
+  border: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $color-white;
+  font-size: 1rem;
+  padding: 0.5rem 0.625rem;
+  border-radius: 0.5rem;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  background-color: $color-mantu;
+  transition: all 0.3s ease;
+  &:not(:last-child) {
+    margin-right: 0.875rem;
+  }
+  &:hover {
+    background-color: adjust-color($color-mantu, $lightness: -10%);
+  }
+  &:focus {
+    outline: 0;
+  }
+  &__icon {
+    + .bc-button {
+      &__text {
+        padding-left: 0.75rem;
+        padding-right: 1rem;
+      }
+    }
+  }
+  &__text {
+    &:only-child {
+      padding: 0 1rem;
+    }
+  }
+  &--light {
+    color: $color-text;
+    background-color: $color-white;
+    &:hover {
+      background-color: adjust-color($color-white, $lightness: -15%);
+    }
+  }
+  &--box-shadow {
+    color: $color-text;
+    background-color: transparent;
+    box-shadow: 0 0.25rem 0.75rem 0 adjust-color($color-black, $alpha: -0.85);
+    &:hover {
+      background-color: $color-btn-border;
+    }
+  }
+  &--secondary {
+    color: $color-mantu;
+    font-weight: 500;
+    padding: 0.4rem 1.125rem;
+    background-color: adjust-color($color-mantu, $alpha: -0.875);
+    &:hover {
+      color: $color-white;
+      background-color: $color-mantu;
+    }
+  }
+  &--gray {
+    color: $color-text;
+    background-color: $color-border;
+    &:hover {
+      background-color: adjust-color($color-black, $alpha: -0.6);
+    }
+  }
+}
+
+/*=====  End of 01. General  ======*/
+
+/*=============================================
+=            02. Override b-button            =
+=============================================*/
+
+.btn {
+  &:focus {
+    outline: 0;
+    box-shadow: none;
+  }
+}
+
+/*=====  End of 02. Override b-button  ======*/
+
