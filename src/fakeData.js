@@ -121,7 +121,21 @@ export const categories = [
     subCategories: [
       {
         id: 'social-media',
-        label: 'Social Media'
+        label: 'Social Media',
+        thirdCategories: [
+          {
+            id: 'sub-cat-1',
+            label: 'sub-cat-1'
+          },
+          {
+            id: 'sub-cat-2',
+            label: 'sub-cat-2'
+          },
+          {
+            id: 'sub-cat-2',
+            label: 'sub-cat-2'
+          }
+        ]
       },
       {
         id: 'mail',

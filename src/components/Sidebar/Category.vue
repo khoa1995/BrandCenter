@@ -9,7 +9,14 @@
             <div class='bc-category__item-label' @click="redirectToTemplate">{{ category.label }}</div>
           </div>
           <div class='bc-category__sub-list'>
-            <div class='bc-category__sub-item clickable' v-for='subCategory in category.subCategories' :key='subCategory.id'>{{ subCategory.label }}</div>
+            <div class='bc-category__sub-item clickable' v-for='subCategory in category.subCategories' :key='subCategory.id'>
+              {{ subCategory.label }}
+            </div>
+            <div class='bc-category__third-sub' v-for="thirdCategory in category.subCategories.thirdCategories" :key="thirdCategory.id">
+              <div class='bc-category__third-sub-item'>
+                  {{thirdCategory.label}}
+                </div>
+              </div>
           </div>
         </div>
       </div>
