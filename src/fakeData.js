@@ -132,8 +132,8 @@ export const categories = [
             label: 'sub-cat-2'
           },
           {
-            id: 'sub-cat-2',
-            label: 'sub-cat-2'
+            id: 'sub-cat-3',
+            label: 'sub-cat-3'
           }
         ]
       },

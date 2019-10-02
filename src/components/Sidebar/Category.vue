@@ -9,14 +9,12 @@
             <div class='bc-category__item-label' @click="redirectToTemplate">{{ category.label }}</div>
           </div>
           <div class='bc-category__sub-list'>
-            <div :class='{"bc-category__sub-item clickable":true, "bc-category__item-link--empty": category.subCategories.length <= 0}' v-for='subCategory in category.subCategories' :key='subCategory.id' @click="handleClickThird(subCategory)">
+            <div :class='{"bc-category__sub-item clickable":true, "bc-category__item-link--empty": category.subCategories.length <= 0}' v-for='subCategory in category.subCategories' :key='subCategory.id'>
               {{ subCategory.label }}
-            </div>
-            <div class='bc-category__third-sub' v-for="thirdCategory in category.subCategories.thirdCategories" :key="thirdCategory.id">
-              <div class='bc-category__third-sub-item'>
-                  {{thirdCategory.label}}
-                </div>
+              <div class='bc-category__third-sub' v-for="thirdCategory in subCategory.thirdCategories" :key="thirdCategory.id">
+                {{ thirdCategory.label }}
               </div>
+            </div>
           </div>
         </div>
       </div>
@@ -47,12 +45,12 @@ export default {
       //   let selectedThirdCategory = this.categories.find(y => y.id === item.id)
       // }
     },
-    handleClickThird (item) {
-      if(item.subCategories.thirdCategories.length > 0) {
-        let selectedItm = this.categories.subCategories.find(x => x.id === item.id)
-        selectedItm.isDropdown = !selectedItm.isDropdown
-      }
-    },
+    // handleClickThird (item) {
+    //   if(item.subCategories.thirdCategories.length > 0) {
+    //     let selectedItm = this.categories.subCategories.find(x => x.id === item.id)
+    //     selectedItm.isDropdown = !selectedItm.isDropdown
+    //   }
+    // },
     redirectToTemplate () {
       this.$router.push({ name: 'template' })
     }
