@@ -9,7 +9,7 @@
             <div class='bc-category__item-label' @click="redirectToTemplate">{{ category.label }}</div>
           </div>
           <div class='bc-category__sub-list'>
-            <div class='bc-category__sub-item clickable' v-for='subCategory in category.subCategories' :key='subCategory.id'>
+            <div :class='{"bc-category__sub-item clickable":true, "bc-category__item-link--empty": category.subCategories.length <= 0}' v-for='subCategory in category.subCategories' :key='subCategory.id' @click="handleClickThird(subCategory)">
               {{ subCategory.label }}
             </div>
             <div class='bc-category__third-sub' v-for="thirdCategory in category.subCategories.thirdCategories" :key="thirdCategory.id">
@@ -42,6 +42,15 @@ export default {
       if (item.subCategories.length > 0) {
         let selectedCategory = this.categories.find(x => x.id === item.id)
         selectedCategory.isDropdown = !selectedCategory.isDropdown
+      }
+      // if(item.subCategories.thirdCategories.length > 0) {
+      //   let selectedThirdCategory = this.categories.find(y => y.id === item.id)
+      // }
+    },
+    handleClickThird (item) {
+      if(item.subCategories.thirdCategories.length > 0) {
+        let selectedItm = this.categories.subCategories.find(x => x.id === item.id)
+        selectedItm.isDropdown = !selectedItm.isDropdown
       }
     },
     redirectToTemplate () {
