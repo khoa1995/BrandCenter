@@ -10,12 +10,15 @@
           </div>
           <!-- SUB-CAT -->
           <div class='bc-category__sub-list'>
-            <div :class='{"bc-category__sub-item":true,"bc-category__item--dropdown": category.subCategories.isDropdown}' v-for='subCategory in category.subCategories' :key='subCategory.id'>
-              <div :class='{"bc-category__item-link":true, "clickable":true, "bc-category__item-link--empty":subCategory.thirdCategories.length <=0}' @click="handleClickSub(subCategory)">
-                {{ subCategory.label }}</div>
+            <div :class='{"bc-category__sub-item":true,"bc-category__sub--dropdown": subCategory.isDropdown}' v-for='subCategory in category.subCategories' :key='subCategory.id'>
+              <div :class='{"bc-category__sub-link":true, "clickable":true, "bc-category__item-link--empty":subCategory.thirdCategories.length <=0}' @click="handleClickSub(subCategory, category)">
+                {{ subCategory.label }}
+              </div>
               <!-- THIRD-SUB-CAT -->
-              <div class='bc-category__third-sub' v-for="thirdCategory in subCategory.thirdCategories" :key="thirdCategory.id">
-                {{ thirdCategory.label }}
+              <div class='bc-category__third-list'>
+                <div class="bc-category__third-itm" v-for="thirdCategory in subCategory.thirdCategories" :key="thirdCategory.id">
+                  {{ thirdCategory.label }}
+                </div>
               </div>  
             </div>          
           </div>
@@ -44,20 +47,11 @@ export default {
         let selectedCategory = this.categories.find(x => x.id === item.id)
         selectedCategory.isDropdown = !selectedCategory.isDropdown
       }
-      // if(item.subCategories.thirdCategories.length > 0) {
-      //   let selectedThirdCategory = this.categories.find(y => y.id === item.id)
-      // }
     },
-    // handleClickThird (item) {
-    //   if(item.subCategories.thirdCategories.length > 0) {
-    //     let selectedItm = this.categories.subCategories.find(x => x.id === item.id)
-    //     selectedItm.isDropdown = !selectedItm.isDropdown
-    //   }
-    // },
-    handleClickSub (item) {
-      if (item.thirdCategories.length > 0) {
-        let selectedSub = this.subCategories.find(y => y.id === item.id)
-        selectedSub.isDropdown = !selectedSub.isDropdown
+    handleClickSub (subCategory, category) {
+      if (subCategory.thirdCategories.length > 0) {
+        let selectedCategorySub = category.subCategories.find(x => x.id === subCategory.id)
+        selectedCategorySub.isDropdown = !selectedCategorySub.isDropdown
       }
     },
     redirectToTemplate () {
@@ -193,6 +187,20 @@ export default {
     }
     &-item {
       padding: 0.5rem 1rem 0.5rem 4rem;
+    }
+
+    &--dropdown {
+      .bc-category {
+        &__third-list {
+          height: auto;
+        }
+      }
+    }
+  }
+  &__third {
+    &-list {
+      height: 0;
+      overflow: hidden;
     }
   }
 }
