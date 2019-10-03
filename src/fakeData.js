@@ -122,6 +122,7 @@ export const categories = [
       {
         id: 'social-media',
         label: 'Social Media',
+        isDropdown: false,
         thirdCategories: [
           {
             id: 'sub-cat-1',
@@ -139,15 +140,21 @@ export const categories = [
       },
       {
         id: 'mail',
-        label: 'Mail'
+        label: 'Mail',
+        isDropdown: false,
+        thirdCategories: []
       },
       {
         id: 'signature-mail',
-        label: 'Signature Mail'
+        label: 'Signature Mail',
+        isDropdown: false,
+        thirdCategories: []
       },
       {
         id: 'invoice',
-        label: 'Invoice'
+        label: 'Invoice',
+        isDropdown: false,
+        thirdCategories: []
       }
     ]
   },
