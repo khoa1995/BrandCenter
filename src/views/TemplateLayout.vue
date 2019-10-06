@@ -1,6 +1,7 @@
 <template>
   <div class="bc-template">
     <Breadcrumb />
+    <BCCriteria />
     <BCFilter isInTemplate />
     <template v-if="contentLayout === 'grid'" >
        <Section>
@@ -29,7 +30,8 @@ export default {
       import(/* webpackChunkName: "BCFilter" */ '@/components/Content/BCFilter'),
     GridLayout: () => import(/* webpackChunkName: "GridLayout" */ '@/components/Content/GridLayout'),
     Section: () => import(/* webpackChunkName: "Section" */ '@/components/Section/Section.vue'),
-    ListLayout: () => import(/* webpackChunkName: "Listlayout" */ '@/components/Content/ListLayout')
+    ListLayout: () => import(/* webpackChunkName: "Listlayout" */ '@/components/Content/ListLayout'),
+    BCCriteria: () => import(/* webpackChunkName: "BCCriteria" */ '@/components/Content/./BCCriteria.vue')
   },
   computed: {
     ...mapState({
