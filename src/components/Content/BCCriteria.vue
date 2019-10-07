@@ -7,6 +7,10 @@
             <span>Social</span>
         </div>
       </div>
+      <div class="bc-criteria__count">
+          <span class="bc-criteria__count-number">1</span>
+          <span>item(s) found</span>
+      </div>
   </div>
 </template>
 
@@ -24,8 +28,8 @@
         margin-bottom: 10px;
         -webkit-border-radius: 50px;
         -moz-border-radius: 50px;
-        border-radius: 50px;
-        background-color: #f0f0f0;
+        border-radius: 4px;
+        background-color: $color-border;
         -webkit-transition: all 0.3s ease;
         -moz-transition: all 0.3s ease;
         transition: all 0.3s ease;
@@ -54,7 +58,7 @@
                 content: '';
                 width: 15px;
                 height: 2px;
-                background-color: #151515;
+                background-color: $color-black;
                 -webkit-border-radius: 3px;
                 -moz-border-radius: 3px;
                 border-radius: 3px;
@@ -78,6 +82,15 @@
                     transform: none;
                 }
             }
+        }
+    }
+    &__count {
+        &-number {
+            border-radius: 4px;
+            padding: 3px 15px;
+            margin-right: 5px;
+            background-color: $color-white;
+            display: inline-block;
         }
     }
 }
