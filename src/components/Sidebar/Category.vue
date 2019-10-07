@@ -11,12 +11,12 @@
           <!-- SUB-CAT -->
           <div class='bc-category__sub-list'>
             <div :class='{"bc-category__sub-item":true,"bc-category__sub--dropdown": subCategory.isDropdown}' v-for='subCategory in category.subCategories' :key='subCategory.id'>
-              <div :class='{"bc-category__sub-link":true, "clickable":true, "bc-category__item-link--empty":subCategory.thirdCategories.length <=0}' @click="handleClickSub(subCategory, category)">
+              <div :class='{"bc-category__sub-link":true, "clickable":true, "bc-category__sub-link--empty":subCategory.thirdCategories.length <=0}' @click="handleClickSub(subCategory, category)">
                 {{ subCategory.label }}
               </div>
               <!-- THIRD-SUB-CAT -->
               <div class='bc-category__third-list'>
-                <div class="bc-category__third-itm" v-for="thirdCategory in subCategory.thirdCategories" :key="thirdCategory.id">
+                <div class="bc-category__third-itm clickable" v-for="thirdCategory in subCategory.thirdCategories" :key="thirdCategory.id">
                   {{ thirdCategory.label }}
                 </div>
               </div>  
@@ -106,7 +106,7 @@ export default {
         &__item {
           &-link {
             color: $color-mantu;
-            background-color: adjust-color($color-mantu, $alpha: -0.8);
+            background-color: adjust-color($color-mantu, $alpha: -0.8, $lightness: 25%);
           }
           &-icon {
             color: $color-white;
@@ -120,11 +120,11 @@ export default {
         &__item {
           &-link {
             color: $color-mantu;
-            background-color: adjust-color($color-mantu, $alpha: -0.8);
+            background-color: adjust-color($color-mantu, $alpha: -0.8, $lightness: 25%);
             &:after {
               top: 1.25rem;
               right: 1rem;
-              border-color: $color-mantu transparent transparent;
+              border-color: $color-black transparent transparent;
             }
           }
           &-icon {
@@ -186,13 +186,51 @@ export default {
       overflow: hidden;
     }
     &-item {
-      padding: 0.5rem 1rem 0.5rem 4rem;
-    }
 
+      border-radius: 0.625rem;
+      margin-left: 2rem;
+      margin-top: 1rem;
+    }
+    &-link {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 1rem 0.5rem 1rem;
+      border-radius: 0.625rem;
+      position: relative;
+      &:hover {
+        color: $color-mantu;
+        background-color: adjust-color($color-mantu, $alpha: -0.8, $lightness: 40%);          
+      }
+      &:after {
+        position: absolute;
+        content: '';
+        top: .75rem;
+        right: 0.5rem;
+        border: 0.375rem solid;
+        border-color: transparent transparent transparent $color-btn-border;
+      }
+      &--empty {
+        &:after {
+          content: none;
+        }
+      }
+    }
     &--dropdown {
-      .bc-category {
-        &__third-list {
-          height: auto;
+      .bc-category {        
+        &__sub-link {
+          color: $color-mantu;
+          background-color: adjust-color($color-mantu, $alpha: -0.8, $lightness: 40%);
+          &:after {
+              top: .75rem;
+              right:0.75rem;
+              border-color: $color-black transparent transparent;
+          }   
+        }
+        &__third {
+          &-list {
+            height: auto;
+            padding: 0.5rem .5rem 0.5rem 2rem;         
+        }
         }
       }
     }
@@ -201,6 +239,14 @@ export default {
     &-list {
       height: 0;
       overflow: hidden;
+    }
+    &-itm {
+      padding: 0.5rem;
+      border-radius: 0.625rem;
+      &:hover {
+        color: $color-mantu;
+        background-color: adjust-color($color-mantu, $alpha: -0.8, $lightness: 40%);
+      }
     }
   }
 }

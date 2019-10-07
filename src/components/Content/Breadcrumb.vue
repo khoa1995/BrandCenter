@@ -5,7 +5,6 @@
       <Icon name="arrow-right" />
     </div>
     <div class="bc-breadcrumb__name-choosen">Home</div>
-
   </div>
 </template>
 
