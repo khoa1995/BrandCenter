@@ -7,7 +7,7 @@
         <div class='bc-grid-layout__item-size'>{{ item.size }}</div>
       </div>
       <div class='bc-grid-layout__item-action'>
-        <button class='bc-grid-layout__item-button bc-button' @click.stop="addItem(item.id, item.type)">
+        <button class='bc-grid-layout__item-button bc-button bc-button--default' @click.stop="addItem(item.id, item.type)">
           <Icon class='bc-button__icon btn-add-item' name='add-to-download'/>
         </button>
         <button class='bc-grid-layout__item-button bc-button bc-button--light'>

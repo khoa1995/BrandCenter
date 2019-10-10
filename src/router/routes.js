@@ -24,16 +24,20 @@ const routes = [
         component: lazyLoad('DemoPDF')
       },
       {
-        path: 'Template',
+        path: 'template',
         name: 'template',
         component: lazyLoad('TemplateLayout')
       },
       {
-        path: 'Package',
+        path: 'package',
         name: 'package',
         component: lazyLoad('TemplatePackage')
       }
     ]
+  },
+  {
+    path: '*',
+    component: lazyLoad('NotFound')
   }
 ]
 

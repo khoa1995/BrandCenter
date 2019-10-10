@@ -10,17 +10,17 @@
           </div>
           <!-- SUB-CAT -->
           <div class='bc-category__sub-list'>
-            <div :class='{"bc-category__sub-item":true,"bc-category__sub--dropdown": subCategory.isDropdown}' v-for='subCategory in category.subCategories' :key='subCategory.id'>
-              <div :class='{"bc-category__sub-link":true, "clickable":true, "bc-category__sub-link--empty":subCategory.thirdCategories.length <=0}' @click="handleClickSub(subCategory, category)">
+            <div :class='{ "bc-category__sub-item": true, "bc-category__sub--dropdown": subCategory.isDropdown }' v-for='subCategory in category.subCategories' :key='subCategory.id'>
+              <div :class='{ "bc-category__sub-link": true, "clickable": true, "bc-category__sub-link--empty": subCategory.thirdCategories.length <= 0 }' @click="handleClickSub(subCategory, category)">
                 {{ subCategory.label }}
               </div>
               <!-- THIRD-SUB-CAT -->
               <div class='bc-category__third-list'>
-                <div class="bc-category__third-itm clickable" v-for="thirdCategory in subCategory.thirdCategories" :key="thirdCategory.id">
+                <div class='bc-category__third-item clickable' v-for="thirdCategory in subCategory.thirdCategories" :key="thirdCategory.id">
                   {{ thirdCategory.label }}
                 </div>
-              </div>  
-            </div>          
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -186,10 +186,9 @@ export default {
       overflow: hidden;
     }
     &-item {
-
-      border-radius: 0.625rem;
-      margin-left: 2rem;
       margin-top: 1rem;
+      margin-left: 2rem;
+      border-radius: 0.625rem;
     }
     &-link {
       display: flex;
@@ -199,7 +198,7 @@ export default {
       position: relative;
       &:hover {
         color: $color-mantu;
-        background-color: adjust-color($color-mantu, $alpha: -0.8, $lightness: 40%);          
+        background-color: adjust-color($color-mantu, $alpha: -0.8, $lightness: 40%);
       }
       &:after {
         position: absolute;
@@ -216,20 +215,20 @@ export default {
       }
     }
     &--dropdown {
-      .bc-category {        
+      .bc-category {
         &__sub-link {
           color: $color-mantu;
           background-color: adjust-color($color-mantu, $alpha: -0.8, $lightness: 40%);
           &:after {
-              top: .75rem;
-              right:0.75rem;
-              border-color: $color-black transparent transparent;
-          }   
+            top: .75rem;
+            right:0.75rem;
+            border-color: $color-black transparent transparent;
+          }
         }
         &__third {
           &-list {
             height: auto;
-            padding: 0.5rem .5rem 0.5rem 2rem;         
+            padding: 0.5rem .5rem 0.5rem 2rem;
         }
         }
       }
@@ -240,7 +239,7 @@ export default {
       height: 0;
       overflow: hidden;
     }
-    &-itm {
+    &-item {
       padding: 0.5rem;
       border-radius: 0.625rem;
       &:hover {

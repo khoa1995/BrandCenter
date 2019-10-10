@@ -7,15 +7,15 @@
     </div>
     <div :class="brandsDropdownClass">
       <div class="bc-app-brand__brands-label">Choose your Brand</div>
-      <div class="bc-app-brand__brands-button clickable" @click="handleClickButton">{{ selectedBrand }}</div>
+      <div class="bc-app-brand__brands-button clickable" @click="handleClickButton">{{ selectedBrandName }}</div>
       <div class="bc-app-brand__brands-dropdown-list-wrapper">
         <div class="bc-app-brand__brands-dropdown-heading">
           <Icon class="bc-app-brand__brands-dropdown-logo" name="logo"/>
           <div class="bc-app-brand__brands-dropdown-heading-label">Select a brand</div>
         </div>
         <div class="bc-app-brand__brands-dropdown-list">
-          <div class="bc-app-brand__brands-dropdown-item clickable" v-for="item in brandList" :key="item.id" @click="handleClickBrand(item.id)">
-            <div class="bc-app-brand__brands-dropdown-item-label">{{ item.label }}</div>
+          <div class="bc-app-brand__brands-dropdown-item clickable" v-for="item in brandList" :key="item.BrandId" @click="handleClickBrand(item.BrandId)">
+            <div class="bc-app-brand__brands-dropdown-item-label">{{ item.Name }}</div>
           </div>
         </div>
       </div>
@@ -24,7 +24,11 @@
 </template>
 
 <script>
-import { brandList } from '@/fakeData.js'
+import { mapState, mapGetters, mapActions } from 'vuex'
+import {
+  GET_BRAND_LIST,
+  UPDATE_SELECTED_BRAND
+} from '@/store/action-types'
 
 export default {
   name: 'bc-app-brand',
@@ -33,21 +37,25 @@ export default {
   },
   data () {
     return {
-      brandList,
       isScrollDown: false,
-      isDropdown: false,
-      selectedBrandId: 'mantu'
+      isDropdown: false
     }
   },
   computed: {
+    ...mapState({
+      brandList: state => state.brand.brandList
+    }),
+    ...mapGetters({
+      selectedBrand: 'brand/selectedBrand'
+    }),
     brandsDropdownClass () {
       return {
         'bc-app-brand__brands': true,
         'bc-app-brand__brands--dropdown': this.isDropdown
       }
     },
-    selectedBrand () {
-      return this.brandList ? this.brandList.find(x => x.id === this.selectedBrandId).label : ''
+    selectedBrandName () {
+      return this.selectedBrand ? this.selectedBrand.Name : ''
     },
     appBrandClass () {
       return {
@@ -57,19 +65,24 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      _getBrandList: `brand/${GET_BRAND_LIST}`,
+      _updateSelectedBrand: `brand/${UPDATE_SELECTED_BRAND}`
+    }),
     handleClickButton () {
-      this.isDropdown = !this.isDropdown
+      // Open dropdown
+      this.isDropdown = true
     },
     handleClickBrand (id) {
-      this.selectedBrandId = id
+      // Update selected Brand
+      this._updateSelectedBrand(id)
       // Hide dropdown
       this.isDropdown = false
     },
     handleClickOutside () {
-      if (typeof event.target.className === 'string') {
-        if (!event.target.className.includes('bc-app-brand__brands')) {
-          this.isDropdown = false
-        }
+      if (typeof event.target.className === 'string' &&
+        !event.target.className.includes('bc-app-brand__brands')) {
+        this.isDropdown = false
       }
     },
     handleScroll (event) {
@@ -77,11 +90,14 @@ export default {
     }
   },
   mounted () {
+    this._getBrandList()
+    // Add click outside event listener
     document.addEventListener('click', this.handleClickOutside)
     document.addEventListener('touchstart', this.handleClickOutside)
     document.addEventListener('scroll', this.handleScroll)
   },
   beforeDestroy () {
+    // Remove click outside event listener
     document.removeEventListener('click', this.handleClickOutside)
     document.removeEventListener('touchstart', this.handleClickOutside)
     document.removeEventListener('scroll', this.handleScroll)

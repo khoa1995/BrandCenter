@@ -4,7 +4,7 @@
       <div class='bc-grid-layout__item-thumbnail' :style='{ backgroundImage: "url(" + require(`@/assets/images/${item.thumbnail}`) + ")" }'></div>
       <!-- <Icon class='bc-grid-layout__item-thumbnail-icon' :name='`type-${item.type}`' v-show='!isInDetail' /> -->
       <div class='bc-grid-layout__item-action'>
-        <button class='bc-grid-layout__item-button bc-button' v-show='!isInDetail' @click.stop="addItem(item.id, item.type)">
+        <button class='bc-grid-layout__item-button bc-button bc-button--default' v-show='!isInDetail' @click.stop="addItem(item.id, item.type)">
           <Icon class='bc-button__icon btn-add-item' name='add-to-download'/>
         </button>
         <button class='bc-grid-layout__item-button bc-button bc-button--light'>

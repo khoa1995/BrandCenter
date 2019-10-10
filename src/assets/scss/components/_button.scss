@@ -35,7 +35,8 @@
     margin-right: 0.875rem;
   }
   &:hover {
-    background-color: adjust-color($color-mantu, $lightness: -10%);
+    // background-color: adjust-color($color-mantu, $lightness: -10%);
+    filter: brightness(0.8);
   }
   &:focus {
     outline: 0;
@@ -53,6 +54,13 @@
       padding: 0 1rem;
     }
   }
+  &--default {
+    color: $color-white;
+    background-color: $color-mantu;
+    &:hover {
+      filter: brightness(0.8);
+    }
+  }
   &--light {
     color: $color-text;
     background-color: $color-white;
@@ -65,7 +73,7 @@
     background-color: transparent;
     box-shadow: 0 0.25rem 0.75rem 0 adjust-color($color-black, $alpha: -0.85);
     &:hover {
-      background-color: $color-btn-border;
+      background-color: $color-placeholder;
     }
   }
   &--secondary {

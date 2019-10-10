@@ -5,6 +5,11 @@ export const UPDATE_SIDEBAR_STATE = 'UPDATE_SIDEBAR_STATE'
 // toast
 export const MAKE_TOAST = 'MAKE_TOAST'
 
+// brand
+export const GET_BRAND_LIST = 'GET_BRAND_LIST'
+export const UPDATE_BRAND_LIST = 'UPDATE_BRAND_LIST'
+export const UPDATE_SELECTED_BRAND = 'UPDATE_SELECTED_BRAND'
+
 // Handle downloadbox
 export const ADD_ITEM_TO_BOX = 'ADD_ITEM_TO_BOX'
 export const REMOVE_ITEM_FROM_BOX = 'REMOVE_ITEM_FROM_BOX'

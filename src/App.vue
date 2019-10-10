@@ -1,11 +1,13 @@
 <template>
   <div id="app" :class="appClass">
-    <Sidebar></Sidebar>
-    <main class="bc-main">
-      <Header></Header>
-      <router-view/>
-    </main>
-    <Toast />
+    <ThemeSwitch>
+      <Sidebar></Sidebar>
+      <main class="bc-main">
+        <Header></Header>
+        <router-view/>
+      </main>
+      <Toast />
+    </ThemeSwitch>
   </div>
 </template>
 
@@ -17,7 +19,8 @@ export default {
   components: {
     Sidebar: () => import(/* webpackChunkName: "Sidebar" */ '@/components/Sidebar/Sidebar.vue'),
     Header: () => import(/* webpackChunkName: "Header" */ '@/components/Header/Header.vue'),
-    Toast: () => import(/* webpackChunkName: "Toast" */ '@/components/Toast/Toast.vue')
+    Toast: () => import(/* webpackChunkName: "Toast" */ '@/components/Toast/Toast.vue'),
+    ThemeSwitch: () => import(/* webpackChunkName: "ThemeSwitch" */ '@/components/ThemeSwitch/ThemeSwitch.vue')
   },
   computed: {
     ...mapState({

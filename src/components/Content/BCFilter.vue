@@ -7,7 +7,7 @@
       <Icon class="bc-filter__button-icon" name="filter" />
       <span class="bc-filter__button-label">Filters</span>
     </div>
-    <SwitchLayout />
+    <LayoutSwitch />
     <div class="bc-filter__content">
       <BCFilterSelect :group="group" v-for="group in filterGroups" :key="group.id" @onSelectGroup="handleSelectGroup" @onSelectItem="handleSelectItem" @onClickOutside="handleClickOutsideGroup" />
     </div>
@@ -21,7 +21,7 @@ export default {
   name: 'bc-filter',
   components: {
     Icon: () => import(/* webpackChunkName: "Icon" */ '@/components/Icon/Icon.vue'),
-    SwitchLayout: () => import(/* webpackChunkName: "SwitchLayout" */ './SwitchLayout.vue'),
+    LayoutSwitch: () => import(/* webpackChunkName: "LayoutSwitch" */ './LayoutSwitch.vue'),
     BCFilterSelect: () => import(/* webpackChunkName: "BCFilterSelect" */ './BCFilterSelect.vue')
   },
   data () {
@@ -129,6 +129,7 @@ export default {
     }
     &-icon {
       color: $color-main;
+      transition: all 0.3s ease;
     }
     &-label {
       padding-left: 0.5rem;

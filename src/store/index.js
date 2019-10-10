@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import config from './modules/config'
 import toast from './modules/toast'
 import downloadbox from './modules/downloadbox'
+import brand from './modules/brand'
 
 Vue.use(Vuex)
 
@@ -10,6 +11,7 @@ export default new Vuex.Store({
   modules: {
     config,
     toast,
-    downloadbox
+    downloadbox,
+    brand
   }
 })

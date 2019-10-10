@@ -1,9 +1,8 @@
-import Vue from 'vue'
 import axios from 'axios'
-import { env } from './config'
+import env from '@/utils/env'
 
 const config = {
-  withCredentials: true,
+  withCredentials: false,
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json'

@@ -1,6 +1,6 @@
 <template>
   <div class="bc-list-layout__action">
-    <button class="bc-list-layout__button bc-button">
+    <button class="bc-list-layout__button bc-button bc-button--default">
       <Icon class="bc-button__icon" name="add-to-download" />
     </button>
     <button class="bc-list-layout__button bc-button bc-button--box-shadow">

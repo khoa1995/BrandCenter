@@ -1,17 +1,15 @@
 <template>
   <div class='bc-main-menu'>
     <div class='bc-main-menu__list'>
-      <div class='bc-main-menu__item clickable' v-for='item in menuList' :key='item.id'>
+      <router-link class='bc-main-menu__item' :to="{ name: item.view }" v-for='item in menuList' :key='item.id'>
         <Icon class='bc-main-menu__item-icon' :name='item.icon' />
         <span class='bc-main-menu__item-label'>{{ item.label }}</span>
-      </div>
+      </router-link>
     </div>
   </div>
 </template>
 
 <script>
-import { menuList } from '@/fakeData.js'
-
 export default {
   name: 'bc-main-menu',
   components: {
@@ -19,7 +17,20 @@ export default {
   },
   data () {
     return {
-      menuList
+      menuList: [
+        {
+          id: 'home',
+          label: 'Home',
+          icon: 'home',
+          view: 'home'
+        },
+        {
+          id: 'packages',
+          label: 'Packages',
+          icon: 'package',
+          view: 'package'
+        }
+      ]
     }
   }
 }
@@ -47,6 +58,7 @@ export default {
     font-weight: 500;
     padding: 0.25rem 0.375rem;
     border-radius: 0.625rem;
+    color: $color-text;
     &:hover {
       color: $color-mantu;
       background-color: adjust-color($color-mantu, $alpha: -0.8);

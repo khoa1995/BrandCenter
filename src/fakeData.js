@@ -2,100 +2,37 @@ export const brandList = [
   {
     id: 'acenperry',
     label: 'Ace&Perry',
-    brandList: [
-      {
-        id: 'acenperry-01',
-        label: 'Ace&Perry 01'
-      },
-      {
-        id: 'acenperry-02',
-        label: 'Ace&Perry 02'
-      }
-    ]
+    color: '#2d43de'
   },
   {
     id: 'amaris',
     label: 'Amaris',
-    brandList: [
-      {
-        id: 'amaris-01',
-        label: 'Amaris 01'
-      },
-      {
-        id: 'amaris-02',
-        label: 'Amaris 02'
-      }
-    ]
+    color: '#ff9b43'
   },
   {
     id: 'hema',
     label: 'Hema',
-    brandList: [
-      {
-        id: 'hema-01',
-        label: 'Hema 01'
-      },
-      {
-        id: 'hema-02',
-        label: 'Hema 02'
-      }
-    ]
+    color: '#2dde53'
   },
   {
     id: 'inner-action',
     label: 'Inner Action',
-    brandList: [
-      {
-        id: 'inner-action-01',
-        label: 'Inner Action 01'
-      },
-      {
-        id: 'inner-action-02',
-        label: 'Inner Action 02'
-      }
-    ]
+    color: '#a2de2d'
   },
   {
     id: 'kob-one',
     label: 'Kob One',
-    brandList: [
-      {
-        id: 'kob-one-01',
-        label: 'Kob One 01'
-      },
-      {
-        id: 'kob-one-02',
-        label: 'Kob One 02'
-      }
-    ]
+    color: '#a03232'
   },
   {
     id: 'lbc',
     label: 'LittleBIG Connection',
-    brandList: [
-      {
-        id: 'lbc-01',
-        label: 'LittleBIG Connection 01'
-      },
-      {
-        id: 'lbc-02',
-        label: 'LittleBIG Connection 02'
-      }
-    ]
+    color: '#fe3f20'
   },
   {
     id: 'mantu',
     label: 'Mantu',
-    brandList: [
-      {
-        id: 'mantu-01',
-        label: 'Mantu 01'
-      },
-      {
-        id: 'mantu-02',
-        label: 'Mantu 02'
-      }
-    ]
+    color: '#4518af'
   }
 ]
 

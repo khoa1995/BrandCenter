@@ -18,7 +18,7 @@ export default {
     Preview: () => import(/* webpackChunkName: "Preview" */ '@/components/Preview/Preview.vue'),
     GridLayoutItem: () => import(/* webpackChunkName: "GridLayoutItem" */ './GridLayoutItem.vue'),
     GridLayoutOverlayItem: () => import(/* webpackChunkName: "GridLayoutOverlayItem" */ './GridLayoutOverlayItem.vue')
-    },
+  },
   props: {
     contentData: {
       type: Array,

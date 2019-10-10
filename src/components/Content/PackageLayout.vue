@@ -10,7 +10,7 @@
             <div class='bc-package-layout__item-description'>{{ item.description }}</div>
           </div>
           <div class='bc-package-layout__item-action'>
-            <button class='bc-package-layout__item-button bc-button' @click.stop='addToDownloadBox(item.id, item.type)'>
+            <button class='bc-package-layout__item-button bc-button bc-button--default' @click.stop='addToDownloadBox(item.id, item.type)'>
               <Icon class='bc-button__icon btn-add-item' name='add-to-download' />
               <span class='bc-button__text'>Add to download</span>
             </button>
