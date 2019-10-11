@@ -1,0 +1,2 @@
+export const DEFAULT_BRAND = 'DEFAULT_BRAND'
+export const DOWNLOAD_BOX = 'DOWNLOAD_BOX'

@@ -27,6 +27,7 @@
 import { mapState, mapGetters, mapActions } from 'vuex'
 import {
   GET_BRAND_LIST,
+  UPDATE_BRAND_LIST,
   UPDATE_SELECTED_BRAND
 } from '@/store/action-types'
 
@@ -67,6 +68,7 @@ export default {
   methods: {
     ...mapActions({
       _getBrandList: `brand/${GET_BRAND_LIST}`,
+      _updateBrandList: `brand/${UPDATE_BRAND_LIST}`,
       _updateSelectedBrand: `brand/${UPDATE_SELECTED_BRAND}`
     }),
     handleClickButton () {
@@ -76,6 +78,8 @@ export default {
     handleClickBrand (id) {
       // Update selected Brand
       this._updateSelectedBrand(id)
+      // Update slug
+      this.$router.replace({ params: { brandSlug: this.selectedBrand.Slug } })
       // Hide dropdown
       this.isDropdown = false
     },
@@ -89,8 +93,7 @@ export default {
       this.isScrollDown = window.scrollY > 100
     }
   },
-  mounted () {
-    this._getBrandList()
+  async mounted () {
     // Add click outside event listener
     document.addEventListener('click', this.handleClickOutside)
     document.addEventListener('touchstart', this.handleClickOutside)

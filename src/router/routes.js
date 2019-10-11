@@ -5,7 +5,7 @@ const lazyLoad = view => () => import(/* webpackChunkName: "view-[request]" */ `
 
 const routes = [
   {
-    path: '/BrandCenter',
+    path: '/:brandSlug',
     component: lazyLoad('Master'),
     children: [
       {

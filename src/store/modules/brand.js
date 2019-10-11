@@ -2,18 +2,23 @@ import {
   GET_BRAND_LIST,
   UPDATE_BRAND_LIST,
   UPDATE_SELECTED_BRAND,
+  GET_BRAND_ID_BY_SLUG,
+  UPDATE_BRAND_SLUG_STATE,
   MAKE_TOAST
 } from './../action-types'
-import { getBrandList } from '@/services/brand'
-import localforage from '@/services/storage'
+import {
+  getBrandList,
+  getBrandIdBySlug
+} from '@/services/brand'
 
 const state = {
-  brandList: []
+  brandList: [],
+  isBrandSlugValid: false
 }
 
 const getters = {
   selectedBrand (state) {
-    return state.brandList.find(x => x.IsDefault)
+    return state.brandList.find(x => x.IsSelected)
   },
   selectedBrandColor (state, getters) {
     return getters.selectedBrand ? getters.selectedBrand.BrandColor : ''
@@ -26,8 +31,11 @@ const mutations = {
   },
   [UPDATE_SELECTED_BRAND] (state, brandId) {
     state.brandList.forEach(brand => {
-      brand.IsDefault = brand.BrandId === brandId
+      brand.IsSelected = brand.BrandId === brandId
     })
+  },
+  [UPDATE_BRAND_SLUG_STATE] (state, payload) {
+    state.isBrandSlugValid = payload
   }
 }
 
@@ -37,24 +45,15 @@ const actions = {
       let response = await getBrandList()
 
       if (response && response.data.Status) {
-        // Update state
-        commit(UPDATE_BRAND_LIST, response.data.Data)
-
-        // Update storage
-        localforage.setItem('defaultBrand', getters.selectedBrand)
-          .then(value => {})
-          .catch(error => {
-            // Make toast an error
-            dispatch(`toast/${MAKE_TOAST}`, {
-              title: error,
-              variant: 'danger'
-            }, { root: true })
-          })
+        return Promise.resolve(response)
+      } else {
+        // Reject an error
+        return Promise.reject(response.data.Message)
       }
     } catch (error) {
       // Make toast an error
       dispatch(`toast/${MAKE_TOAST}`, {
-        title: 'error',
+        title: error,
         variant: 'danger'
       }, { root: true })
 
@@ -62,8 +61,39 @@ const actions = {
       return Promise.reject(error)
     }
   },
-  [UPDATE_SELECTED_BRAND] ({ commit }, payload) {
-    commit(UPDATE_SELECTED_BRAND, payload)
+  [UPDATE_BRAND_LIST] ({ commit, getters }, payload) {
+    let brandList = payload.data.Data
+    // Append isSelected property
+    let localBrandList = brandList.map(brand => ({
+      ...brand,
+      IsSelected: brand.IsDefault
+    }))
+
+    // Update state
+    commit(UPDATE_BRAND_LIST, localBrandList)
+  },
+  [UPDATE_SELECTED_BRAND] ({ commit }, brandId) {
+    commit(UPDATE_SELECTED_BRAND, brandId)
+  },
+  async [GET_BRAND_ID_BY_SLUG] ({ dispatch }, slug) {
+    try {
+      let response = await getBrandIdBySlug(slug)
+      if (response && response.data.Status) {
+        return Promise.resolve(response)
+      }
+    } catch (error) {
+      // Make toast an error
+      dispatch(`toast/${MAKE_TOAST}`, {
+        title: error,
+        variant: 'danger'
+      }, { root: true })
+
+      // Reject an error
+      return Promise.reject(error)
+    }
+  },
+  [UPDATE_BRAND_SLUG_STATE] ({ commit }, payload) {
+    commit(UPDATE_BRAND_SLUG_STATE, payload)
   }
 }
 

@@ -1,5 +1,5 @@
 const appBasePath = '/BrandCenter'
-const distAppPath = '/ClientApp'
+const distAppPath = '/App'
 
 module.exports = {
   lintOnSave: true,

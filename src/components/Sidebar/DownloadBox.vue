@@ -37,7 +37,8 @@ import { mapActions, mapState } from 'vuex'
 import {
   MAKE_TOAST,
   SET_DOWNLOAD_BOX,
-  REMOVE_ITEM_FROM_BOX
+  REMOVE_ITEM_FROM_BOX,
+  SET_DOWNLOAD_BOX_FROM_CACHE
 } from '@/store/action-types'
 
 export default {
@@ -72,8 +73,9 @@ export default {
   methods: {
     ...mapActions({
       _makeToast: `toast/${MAKE_TOAST}`,
-      _SetDownloadBox: `downloadbox/${SET_DOWNLOAD_BOX}`,
-      _removeAddedItem: `downloadbox/${REMOVE_ITEM_FROM_BOX}`
+      // _SetDownloadBox: `downloadbox/${SET_DOWNLOAD_BOX}`,
+      _removeAddedItem: `downloadbox/${REMOVE_ITEM_FROM_BOX}`,
+      _setDownloadBoxFromCache: `downloadbox/${SET_DOWNLOAD_BOX_FROM_CACHE}`
     }),
     handleClickBox () {
       this.isOpenDownloadBox = !this.isOpenDownloadBox
@@ -99,6 +101,7 @@ export default {
     }
   },
   mounted () {
+    this._setDownloadBoxFromCache()
     document.addEventListener('click', this.handleClickOutside)
     document.addEventListener('touchstart', this.handleClickOutside)
   },
