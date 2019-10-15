@@ -1,10 +1,10 @@
 <template>
   <div class='bc-grid-layout__item'>
     <div class='bc-grid-layout__item-thumbnail-wrapper'>
-      <div class='bc-grid-layout__item-thumbnail' :style='{ backgroundImage: "url(" + require(`@/assets/images/${item.thumbnail}`) + ")" }'></div>
+      <div class='bc-grid-layout__item-thumbnail' :style='{ backgroundImage: `url(http://localhost/BrandCenter/${item.ThumbnailUrl})` }'></div>
       <!-- <Icon class='bc-grid-layout__item-thumbnail-icon' :name='`type-${item.type}`' v-show='!isInDetail' /> -->
       <div class='bc-grid-layout__item-action'>
-        <button class='bc-grid-layout__item-button bc-button bc-button--default' v-show='!isInDetail' @click.stop="addItem(item.id, item.type)">
+        <button class='bc-grid-layout__item-button bc-button bc-button--default' v-show='!isInDetail' @click.stop="addItem(item.FileId, item.type)">
           <Icon class='bc-button__icon btn-add-item' name='add-to-download'/>
         </button>
         <button class='bc-grid-layout__item-button bc-button bc-button--light'>
@@ -17,8 +17,8 @@
         <Icon :name='`type-${item.type}`' />
       </div>
       <div class='bc-grid-layout__item-info'>
-        <a href='javascript:void(0);' class='bc-grid-layout__item-title'>{{ item.title }}</a>
-        <div class='bc-grid-layout__item-size'>{{ item.size }}</div>
+        <a href='javascript:void(0);' class='bc-grid-layout__item-title'>{{ item.Title }}</a>
+        <div class='bc-grid-layout__item-size'>{{ item.Size }}</div>
       </div>
     </div>
   </div>

@@ -2,7 +2,7 @@
   <div class="bc-download-box">
     <div class="bc-download-box__button clickable" @click="handleClickBox">
       <Icon class="bc-download-box__button-icon" name="download-box"/>
-      <span class="bc-download-box__button-icon-count">{{ itmCounter }}</span>
+      <span class="bc-download-box__button-icon-count">{{ itemCounter }}</span>
     </div>
     <div :class="boxInnerClass">
       <div class="bc-download-box__close-button clickable" @click="handleClickCloseBox">
@@ -36,7 +36,7 @@
 import { mapActions, mapState } from 'vuex'
 import {
   MAKE_TOAST,
-  SET_DOWNLOAD_BOX,
+  // SET_DOWNLOAD_BOX,
   REMOVE_ITEM_FROM_BOX,
   SET_DOWNLOAD_BOX_FROM_CACHE
 } from '@/store/action-types'
@@ -56,12 +56,14 @@ export default {
       addedItems: state => state.downloadbox.addedItems
     }),
     contentCounter () {
-      let res = `${this.addedItems.length} Content${this.addedItems.length > 1 ? 's' : ''}`
+      let res = ''
+      if (this.addedItems) {
+        res = `${this.addedItems.length} Content${this.addedItems.length > 1 ? 's' : ''}`
+      }
       return res
     },
-    itmCounter () {
-      let itm = `${this.addedItems.length}`
-      return itm
+    itemCounter () {
+      return this.addedItems ? this.addedItems.length : 0
     },
     boxInnerClass () {
       return {

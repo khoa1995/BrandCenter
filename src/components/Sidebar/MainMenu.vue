@@ -1,7 +1,7 @@
 <template>
   <div class='bc-main-menu'>
     <div class='bc-main-menu__list'>
-      <router-link class='bc-main-menu__item' :to="{ name: item.view }" v-for='item in menuList' :key='item.id'>
+      <router-link class='bc-main-menu__item' :to="{ name: item.view }" v-for='item in menuList' :key='item.id' @click.native="handleClickMenu">
         <Icon class='bc-main-menu__item-icon' :name='item.icon' />
         <span class='bc-main-menu__item-label'>{{ item.label }}</span>
       </router-link>
@@ -10,6 +10,9 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+import { UPDATE_SIDEBAR_STATE } from '@/store/action-types'
+
 export default {
   name: 'bc-main-menu',
   components: {
@@ -31,6 +34,14 @@ export default {
           view: 'package'
         }
       ]
+    }
+  },
+  methods: {
+    ...mapActions({
+      _updateSidebarState: `config/${UPDATE_SIDEBAR_STATE}`
+    }),
+    handleClickMenu () {
+      this._updateSidebarState(false)
     }
   }
 }
@@ -88,6 +99,11 @@ export default {
         flex-basis: 2.5rem;
         max-width: 2.5rem;
         height: 2.5rem;
+      }
+      /deep/ svg {
+        @media screen and (max-width: $width-fHD-zoom-125) {
+          transform: scale(0.8);
+        }
       }
     }
     &-label {

@@ -1,6 +1,6 @@
 <template>
   <div class='bc-grid-layout'>
-    <div class='bc-grid-layout__item-wrapper' v-for='item in contentData' :key='`file_${item.id}`' @click="modalPreview=!modalPreview">
+    <div class='bc-grid-layout__item-wrapper' v-for='item in contentData' :key='`file_${item.FileId}`' @click="modalPreview=!modalPreview">
       <GridLayoutOverlayItem :item='item' v-if='layout === "overlay"'/>
       <GridLayoutItem :item='item' v-else/>
     </div>

@@ -1,39 +1,40 @@
 <template>
-  <span class='bc-icon'>
-    <IconLogo v-if='name === "logo"' />
-    <IconSearch v-else-if='name === "search"' />
-    <IconHome v-else-if='name === "home"' />
-    <IconPackage v-else-if='name === "package"' />
-    <IconTemplate v-else-if='name === "template"' />
-    <IconDocument v-else-if='name === "document"' />
-    <IconPhoto v-else-if='name === "photo"' />
-    <IconVideo v-else-if='name === "video"' />
-    <IconGraphicElement v-else-if='name === "graphic-element"' />
-    <IconExpand v-else-if='name === "expand"' />
-    <IconDownload v-else-if='name === "download"' />
-    <IconDownloadBox v-else-if='name === "download-box"' />
-    <IconClose v-else-if='name === "close"' />
-    <IconArrowRight v-else-if='name === "arrow-right"'/>
-    <IconAddToDownload v-else-if='name === "add-to-download"'/>
-    <IconTypePackage v-else-if='name === "type-package"'/>
-    <IconTypeWord v-else-if='name === "type-word"'/>
-    <IconTypePPT v-else-if='name === "type-ppt"'/>
-    <IconTypePhoto v-else-if='name === "type-photo"'/>
-    <IconTypeExcel v-else-if='name === "type-excel"'/>
-    <IconTypePDF v-else-if='name === "type-pdf"'/>
-    <IconTypeVideo v-else-if='name === "type-video"'/>
-    <IconSearchSuggest v-else-if='name === "suggestion"'/>
-    <IconLock v-else-if='name === "lock"'/>
-    <IconPreview v-else-if='name === "preview"'/>
-    <IconImage v-else-if='name === "image"'/>
-    <IconFilter v-else-if='name === "filter"'/>
-    <IconList v-else-if='name === "list"'/>
-    <IconGrid v-else-if='name === "grid"'/>
-    <IconAngleRight v-else-if='name === "angle-right"'/>
-    <IconMore v-else-if='name === "more"'/>
-    <IconUnlock v-else-if='name === "unlock"'/>
-    <IconShare v-else-if='name === "share"'/>
-    <IconHamburger v-else-if='name === "hamburger"'/>
+  <span class="bc-icon">
+    <IconLogo v-if="name === 'logo'" />
+    <IconSearch v-else-if="name === 'search'" />
+    <IconHome v-else-if="name === 'home'" />
+    <IconPackage v-else-if="name === 'package'" />
+    <IconTemplate v-else-if="name === 'template'" />
+    <IconDocument v-else-if="name === 'document'" />
+    <IconPhoto v-else-if="name === 'photo'" />
+    <IconVideo v-else-if="name === 'video'" />
+    <IconGraphicElement v-else-if="name === 'graphic-element'" />
+    <IconExpand v-else-if="name === 'expand'" />
+    <IconDownload v-else-if="name === 'download'" />
+    <IconDownloadBox v-else-if="name === 'download-box'" />
+    <IconClose v-else-if="name === 'close'" />
+    <IconArrowRight v-else-if="name === 'arrow-right'"/>
+    <IconAddToDownload v-else-if="name === 'add-to-download'"/>
+    <IconTypePackage v-else-if="name === 'type-package'"/>
+    <IconTypeWord v-else-if="name === 'type-word'"/>
+    <IconTypePPT v-else-if="name === 'type-ppt'"/>
+    <IconTypePhoto v-else-if="name === 'type-photo'"/>
+    <IconTypeExcel v-else-if="name === 'type-excel'"/>
+    <IconTypePDF v-else-if="name === 'type-pdf'"/>
+    <IconTypeVideo v-else-if="name === 'type-video'"/>
+    <IconSearchSuggest v-else-if="name === 'suggestion'"/>
+    <IconLock v-else-if="name === 'lock'"/>
+    <IconPreview v-else-if="name === 'preview'"/>
+    <IconImage v-else-if="name === 'image'"/>
+    <IconFilter v-else-if="name === 'filter'"/>
+    <IconList v-else-if="name === 'list'"/>
+    <IconGrid v-else-if="name === 'grid'"/>
+    <IconAngleRight v-else-if="name === 'angle-right'"/>
+    <IconMore v-else-if="name === 'more'"/>
+    <IconUnlock v-else-if="name === 'unlock'"/>
+    <IconShare v-else-if="name === 'share'"/>
+    <IconHamburger v-else-if="name === 'hamburger'"/>
+    <IconFolder v-else-if="name === 'folder'"/>
     <IconDefault v-else />
   </span>
 </template>
@@ -79,7 +80,8 @@ export default {
     IconMore: () => import(/* webpackChunkName: "Icon" */ './Icons/IconMore'),
     IconUnlock: () => import(/* webpackChunkName: "Icon" */ './Icons/IconUnlock'),
     IconShare: () => import(/* webpackChunkName: "Icon" */ './Icons/IconShare'),
-    IconHamburger: () => import(/* webpackChunkName: "Icon" */ './Icons/IconHamburger')
+    IconHamburger: () => import(/* webpackChunkName: "Icon" */ './Icons/IconHamburger'),
+    IconFolder: () => import(/* webpackChunkName: "Icon" */ './Icons/IconFolder')
   }
 }
 </script>

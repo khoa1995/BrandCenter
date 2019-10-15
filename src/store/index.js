@@ -4,6 +4,9 @@ import config from './modules/config'
 import toast from './modules/toast'
 import downloadbox from './modules/downloadbox'
 import brand from './modules/brand'
+import category from './modules/category'
+import packages from './modules/packages'
+import files from './modules/files'
 
 Vue.use(Vuex)
 
@@ -12,6 +15,9 @@ export default new Vuex.Store({
     config,
     toast,
     downloadbox,
-    brand
+    brand,
+    category,
+    packages,
+    files
   }
 })

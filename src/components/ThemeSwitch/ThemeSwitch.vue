@@ -50,6 +50,11 @@ export default {
           background-color: ${this.selectedBrandColor};
         }
 
+        /* Sidebar */
+        .bc-theme-switch .bc-sidebar__hamburger {
+          background-color: ${this.selectedBrandColor};
+        }
+
         /* Main Menu */
         .bc-theme-switch .bc-main-menu__item:hover {
           color: ${this.selectedBrandColor};
@@ -63,8 +68,7 @@ export default {
         .bc-theme-switch .bc-category__item:hover .bc-category__item-link,
         .bc-theme-switch .bc-category__item--dropdown .bc-category__item-link,
         .bc-theme-switch .bc-category__sub-link:hover,
-        .bc-theme-switch .bc-category__sub--dropdown .bc-category__sub-link, 
-        .bc-theme-switch .bc-category__third-item:hover {
+        .bc-theme-switch .bc-category__sub-item--dropdown > .bc-category__sub-link {
           color: ${this.selectedBrandColor};
           background-color: ${color.setAlpha(0.2).toString()};
         }

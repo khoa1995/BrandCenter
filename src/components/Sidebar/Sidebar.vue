@@ -107,12 +107,11 @@ export default {
       display: flex;
     }
   }
-  &__top {
-  }
   &__bottom {
     margin-top: auto;
     margin-bottom: 0;
     @media screen and (max-width: $iPhoneXSMax-landscape) {
+      // Large padding for Chrome mobile tool bar
       padding-bottom: 6rem;
     }
   }

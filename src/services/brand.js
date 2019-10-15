@@ -9,13 +9,11 @@ const brandAPI = {
 export const getBrandList = () => {
   return api.get({
     url: brandAPI.getBrandListUrl
-  }).then(response => Promise.resolve(response))
-    .catch(error => Promise.reject(error))
+  })
 }
 
 export const getBrandIdBySlug = slug => {
   return api.get({
     url: `${brandAPI.getBrandIdBySlug}/${slug}`
-  }).then(response => Promise.resolve(response))
-    .catch(error => Promise.reject(error))
+  })
 }

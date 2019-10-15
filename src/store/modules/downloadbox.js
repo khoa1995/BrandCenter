@@ -10,6 +10,7 @@ import {
 import {
   DOWNLOAD_BOX
 } from './../localforage-keys'
+import localforage from 'localforage'
 
 const state = {
   files: [],
@@ -52,11 +53,14 @@ const actions = {
   //   commit(SET_DOWNLOAD_BOX, payload);
   // },
 
-  [SET_DOWNLOAD_BOX_FROM_CACHE] ({ commit }) {
-    let addedItems = state.addedItems
-    let cache = localforage.getItem(DOWNLOAD_BOX)
-    if (!addedItems && cache !== undefined) {
-      commit(SET_DOWNLOAD_BOX, cache)
+  async [SET_DOWNLOAD_BOX_FROM_CACHE] ({ commit }) {
+    try {
+      let cache = await localforage.getItem(DOWNLOAD_BOX)
+      if(cache !== null){
+        commit(SET_DOWNLOAD_BOX, cache)
+      }
+    } catch (e) {
+      console.log(e)
     }
   },
 
@@ -102,10 +106,7 @@ function CacheDownloadBox () {
     .then(value => {})
     .catch(error => {
       // Make toast an error
-      dispatch(`toast/${MAKE_TOAST}`, {
-        title: error,
-        variant: 'danger'
-      }, { root: true })
+      console.log(error)
     })
 }
 

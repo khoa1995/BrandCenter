@@ -1,21 +1,10 @@
 <template>
-  <div class='bc-search-bar'>
-    <span class='bc-search-bar__icon'>
+  <div class="bc-search-bar">
+    <span class="bc-search-bar__icon">
       <Icon name="search"/>
     </span>
-    <input class='bc-search-bar__input' placeholder="Search by Name, Type, Keyword ..."/>
-    <div class="bc-search-bar__suggestion">
-      <div class="bc-search-bar__suggestion-item">
-        <div class="bc-search-bar__suggestion-item__header">
-          <span class="bc-search-bar__suggestion-item__icon">
-            <Icon name="suggestion"/>
-            <span class="bc-search-bar__suggestion-item__title">Search your file in</span>
-          </span>
-        </div>
-      </div>
-      <div class="bc-search-bar__suggestion-item"></div>
-      <div class="bc-search-bar__suggestion-item"></div>
-    </div>
+    <input class="bc-search-bar__input" placeholder="Search by Name, Type, Keyword ..."/>
+    <SearchSuggestion />
   </div>
 </template>
 
@@ -23,7 +12,8 @@
 export default {
   name: 'bc-search-bar',
   components: {
-    Icon: () => import(/* webpackChunkName: "Icon" */ '@/components/Icon/Icon.vue')
+    Icon: () => import(/* webpackChunkName: "Icon" */ '@/components/Icon/Icon.vue'),
+    SearchSuggestion: () => import(/* webpackChunkName: "SearchSuggestion" */ './SearchSuggestion')
   }
 }
 </script>
@@ -35,7 +25,7 @@ export default {
   display: flex;
   position: relative;
   flex: 1 0 auto;
-  padding-right: 4rem;
+  margin-right: 4rem;
   @media screen and (max-width: $iPhoneXSMax-landscape) {
     padding-right: 2rem;
   }
@@ -68,21 +58,9 @@ export default {
     }
     &:focus {
       border-bottom-color: $color-mantu;
-    }
-  }
-  &__suggestion {
-    position: absolute;
-    opacity: 0;
-    visibility: hidden;
-    z-index: 2;
-    top: 100%;
-    left: 2.5rem;
-    padding: 1rem;
-    width: calc(100% - 6.5rem);
-    background-color: $color-white;
-    &-item {
-      &__title {
-        margin-left: 0.65rem;
+      /deep/ + .bc-search-suggestion {
+        opacity: 1;
+        visibility: visible;
       }
     }
   }

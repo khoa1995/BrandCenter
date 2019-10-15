@@ -4,14 +4,14 @@
     <BCFilter />
     <template v-if="contentLayout === 'grid'" >
       <Section>
-        <PackageLayout :contentData="packages" />
+        <PackageLayout :contentData="packageList" />
       </Section>
       <Section title="New content">
-        <GridLayout :contentData="files"/>
+        <GridLayout :contentData="recentFiles"/>
       </Section>
-      <Section title="New content overlay layout">
+      <!-- <Section title="New content overlay layout">
         <GridLayout :contentData="files" layout="overlay"/>
-      </Section>
+      </Section> -->
     </template>
     <template v-else>
       <ListLayout :contentData="files" />
@@ -21,8 +21,13 @@
 
 <script>
 import { files, packages } from '@/fakeData.js'
-import { mapState, mapActions } from 'vuex'
-import { LOAD_FILES, LOAD_PACKAGES } from '@/store/action-types'
+import { mapState, mapGetters, mapActions } from 'vuex'
+import {
+  LOAD_FILES,
+  LOAD_PACKAGES,
+  GET_PACKAGE_BY_BRAND,
+  GET_RECENT_FILES
+} from '@/store/action-types'
 
 export default {
   name: 'home',
@@ -38,19 +43,29 @@ export default {
     ...mapState({
       contentLayout: state => state.config.contentLayout,
       files: state => state.downloadbox.files,
-      packages: state => state.downloadbox.packages
+      packages: state => state.downloadbox.packages,
+      packageList: state => state.packages.packageList,
+      recentFiles: state => state.files.recentFiles
+    }),
+    ...mapGetters({
+      selectedBrand: 'brand/selectedBrand'
     })
   },
   methods: {
     ...mapActions({
       _setFiles: `downloadbox/${LOAD_FILES}`,
-      _setPackages: `downloadbox/${LOAD_PACKAGES}`
+      _setPackages: `downloadbox/${LOAD_PACKAGES}`,
+      _getPackageByBrand: `packages/${GET_PACKAGE_BY_BRAND}`,
+      _getRecentFiles: `files/${GET_RECENT_FILES}`
     })
   },
-
   created () {
     this._setFiles(files)
     this._setPackages(packages)
+  },
+  mounted () {
+    this._getPackageByBrand(this.selectedBrand.BrandId)
+    this._getRecentFiles(this.selectedBrand.BrandId)
   }
 }
 </script>

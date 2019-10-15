@@ -1,23 +1,25 @@
 <template>
-  <div class='bc-category'>
-    <div class='bc-category__title'>Libraries</div>
-    <div class='bc-category__list-wrapper'>
-      <div class='bc-category__list'>
-        <div :class='{ "bc-category__item": true, "bc-category__item--dropdown": category.isDropdown }' v-for='category in categories' :key='category.id'>
-          <div :class='{ "bc-category__item-link": true, "clickable": true, "bc-category__item-link--empty": category.subCategories.length <= 0 }' @click='handleClickItem(category)'>
-            <Icon class='bc-category__item-icon' :name='category.icon' />
-            <div class='bc-category__item-label' @click="redirectToTemplate">{{ category.label }}</div>
+  <div class="bc-category">
+    <div class="bc-category__title">Libraries</div>
+    <div class="bc-category__list-wrapper">
+      <div class="bc-category__list">
+        <div :class="{ 'bc-category__item': true, 'bc-category__item--dropdown': category.IsDropdown }" v-for="category in categoryList" :key="category.Id">
+          <div :class="{ 'bc-category__item-link': true, 'clickable': true, 'bc-category__item-link--empty': category.SubCategories.length <= 0 }" @click="handleClickLink(category)">
+            <Icon class="bc-category__item-icon" :name="category.Icon" />
+            <span class="bc-category__item-label">{{ category.Label }}</span>
+            <span class="bc-category__item-arrow" @click.stop="handleOpenSecondCategory(category)"></span>
           </div>
-          <!-- SUB-CAT -->
-          <div class='bc-category__sub-list'>
-            <div :class='{ "bc-category__sub-item": true, "bc-category__sub--dropdown": subCategory.isDropdown }' v-for='subCategory in category.subCategories' :key='subCategory.id'>
-              <div :class='{ "bc-category__sub-link": true, "clickable": true, "bc-category__sub-link--empty": subCategory.thirdCategories.length <= 0 }' @click="handleClickSub(subCategory, category)">
-                {{ subCategory.label }}
+          <!-- SECOND-CATEGORY -->
+          <div class="bc-category__sub-list">
+            <div :class="{ 'bc-category__sub-item': true, 'bc-category__sub-item--dropdown': secondCategory.IsDropdown }" v-for="secondCategory in category.SubCategories" :key="secondCategory.Id">
+              <div :class="{ 'bc-category__sub-link': true, 'clickable': true, 'bc-category__sub-link--empty': secondCategory.SubCategories.length <= 0 }" @click="handleClickLink(secondCategory)">
+                <span>{{ secondCategory.Label }}</span>
+                <span class="bc-category__item-arrow" @click.stop="handleOpenThirdCategory(secondCategory, category)"></span>
               </div>
-              <!-- THIRD-SUB-CAT -->
-              <div class='bc-category__third-list'>
-                <div class='bc-category__third-item clickable' v-for="thirdCategory in subCategory.thirdCategories" :key="thirdCategory.id">
-                  {{ thirdCategory.label }}
+              <!-- THIRD-CATEGORY -->
+              <div class="bc-category__sub-list">
+                <div class="bc-category__sub-item clickable" v-for="thirdCategory in secondCategory.SubCategories" :key="thirdCategory.Id">
+                  <div class="bc-category__sub-link" @click="handleClickLink(thirdCategory)">{{ thirdCategory.Label }}</div>
                 </div>
               </div>
             </div>
@@ -29,34 +31,49 @@
 </template>
 
 <script>
-import { categories } from '@/fakeData.js'
+import { mapState, mapActions } from 'vuex'
+import {
+  GET_CATEGORY_LIST,
+  HANDLE_SECONDARY_CATEGORY,
+  HANDLE_THIRD_CATEGORY,
+  UPDATE_SIDEBAR_STATE
+} from '@/store/action-types'
 
 export default {
   name: 'bc-category',
   components: {
     Icon: () => import(/* webpackChunkName: "Icon" */ '@/components/Icon/Icon.vue')
   },
-  data () {
-    return {
-      categories
-    }
+  computed: {
+    ...mapState({
+      categoryList: state => state.category.categoryList
+    })
   },
   methods: {
-    handleClickItem (item) {
-      if (item.subCategories.length > 0) {
-        let selectedCategory = this.categories.find(x => x.id === item.id)
-        selectedCategory.isDropdown = !selectedCategory.isDropdown
-      }
-    },
-    handleClickSub (subCategory, category) {
-      if (subCategory.thirdCategories.length > 0) {
-        let selectedCategorySub = category.subCategories.find(x => x.id === subCategory.id)
-        selectedCategorySub.isDropdown = !selectedCategorySub.isDropdown
-      }
-    },
-    redirectToTemplate () {
+    ...mapActions({
+      _getCategoryList: `category/${GET_CATEGORY_LIST}`,
+      _handleSecondaryCategory: `category/${HANDLE_SECONDARY_CATEGORY}`,
+      _handleThirdCategory: `category/${HANDLE_THIRD_CATEGORY}`,
+      _updateSidebarState: `config/${UPDATE_SIDEBAR_STATE}`
+    }),
+    handleClickLink (item) {
       this.$router.push({ name: 'template' })
+      this._updateSidebarState(false)
+    },
+    handleOpenSecondCategory (category) {
+      if (category.SubCategories.length > 0) {
+        this._handleSecondaryCategory(category)
+      }
+    },
+    handleOpenThirdCategory (category, parentCategory) {
+      if (parentCategory.SubCategories.length > 0) {
+        let model = { category: category, parentCategory: parentCategory }
+        this._handleThirdCategory(model)
+      }
     }
+  },
+  mounted () {
+    this._getCategoryList()
   }
 }
 </script>
@@ -121,10 +138,11 @@ export default {
           &-link {
             color: $color-mantu;
             background-color: adjust-color($color-mantu, $alpha: -0.8, $lightness: 25%);
-            &:after {
-              top: 1.25rem;
-              right: 1rem;
-              border-color: $color-black transparent transparent;
+            > .bc-category__item-arrow {
+              transform: rotate(90deg);
+              &:after {
+                border-color: transparent transparent transparent $color-black;
+              }
             }
           }
           &-icon {
@@ -132,6 +150,8 @@ export default {
             background-color: $color-mantu;
           }
         }
+      }
+      > .bc-category {
         &__sub-list {
           height: auto;
         }
@@ -143,17 +163,13 @@ export default {
       padding: 0.25rem 0.375rem;
       border-radius: 0.625rem;
       position: relative;
-      &:after {
-        position: absolute;
-        content: '';
-        top: 1rem;
-        right: 0.75rem;
-        border: 0.375rem solid;
-        border-color: transparent transparent transparent $color-btn-border;
-      }
       &--empty {
-        &:after {
-          content: none;
+        .bc-category {
+          &__item {
+            &-arrow {
+              display: none;
+            }
+          }
         }
       }
     }
@@ -175,9 +191,47 @@ export default {
         max-width: 2.5rem;
         height: 2.5rem;
       }
+      /deep/ svg {
+        @media screen and (max-width: $width-fHD-zoom-125) {
+          transform: scale(0.8);
+        }
+      }
     }
     &-label {
       padding-left: 1.25rem;
+    }
+    &-arrow {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 3rem;
+      height: 3rem;
+      @media screen and (max-width: $width-fHD-zoom-125) {
+        right: 0.286rem;
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+      @media screen and (max-width: $iPhoneXSMax-landscape) {
+        right: 0;
+        width: 3rem;
+        height: 3rem;
+      }
+      &:after {
+        position: absolute;
+        content: '';
+        top: 1.125rem;
+        right: 1rem;
+        border: 0.375rem solid;
+        border-color: transparent transparent transparent $color-btn-border;
+        @media screen and (max-width: $width-fHD-zoom-125) {
+          top: 0.857rem;
+          right: 0.57rem;
+        }
+        @media screen and (max-width: $iPhoneXSMax-landscape) {
+          top: 1.143rem;
+          right: 1rem;
+        }
+      }
     }
   }
   &__sub {
@@ -189,6 +243,33 @@ export default {
       margin-top: 1rem;
       margin-left: 2rem;
       border-radius: 0.625rem;
+      @media screen and (max-width: $width-fHD-zoom-125) {
+        margin-top: 0.75rem;
+        margin-left: 1.5rem;
+      }
+      &--dropdown {
+        > .bc-category {
+          &__sub-link {
+            color: $color-mantu;
+            background-color: adjust-color($color-mantu, $alpha: -0.8, $lightness: 40%);
+            > .bc-category {
+              &__item {
+                &-arrow {
+                  transform: rotate(90deg);
+                  &:after {
+                    border-color: transparent transparent transparent $color-black;
+                  }
+                }
+              }
+            }
+          }
+        }
+        .bc-category {
+          &__sub-list {
+            height: auto;
+          }
+        }
+      }
     }
     &-link {
       display: flex;
@@ -200,51 +281,27 @@ export default {
         color: $color-mantu;
         background-color: adjust-color($color-mantu, $alpha: -0.8, $lightness: 40%);
       }
-      &:after {
-        position: absolute;
-        content: '';
-        top: .75rem;
-        right: 0.5rem;
-        border: 0.375rem solid;
-        border-color: transparent transparent transparent $color-btn-border;
-      }
-      &--empty {
-        &:after {
-          content: none;
-        }
-      }
-    }
-    &--dropdown {
       .bc-category {
-        &__sub-link {
-          color: $color-mantu;
-          background-color: adjust-color($color-mantu, $alpha: -0.8, $lightness: 40%);
-          &:after {
-            top: .75rem;
-            right:0.75rem;
-            border-color: $color-black transparent transparent;
+        &__item {
+          &-arrow {
+            right: 0.375rem;
+            width: 2.25rem;
+            height: 2.25rem;
+            &:after {
+              top: 0.75rem;
+              right: 0.5rem;
+            }
           }
         }
-        &__third {
-          &-list {
-            height: auto;
-            padding: 0.5rem .5rem 0.5rem 2rem;
-        }
-        }
       }
-    }
-  }
-  &__third {
-    &-list {
-      height: 0;
-      overflow: hidden;
-    }
-    &-item {
-      padding: 0.5rem;
-      border-radius: 0.625rem;
-      &:hover {
-        color: $color-mantu;
-        background-color: adjust-color($color-mantu, $alpha: -0.8, $lightness: 40%);
+      &--empty {
+        .bc-category {
+          &__item {
+            &-arrow {
+              display: none;
+            }
+          }
+        }
       }
     }
   }

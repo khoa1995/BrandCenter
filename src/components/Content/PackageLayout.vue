@@ -1,16 +1,16 @@
 <template>
   <div class='bc-package-layout'>
-    <div class='bc-package-layout__item' v-for='item in contentData' :key="`package_${item.id}`" @click="modalPreview=!modalPreview">
+    <div class='bc-package-layout__item' v-for='item in contentData' :key="`package_${item.Id}`" @click="modalPreview=!modalPreview">
       <template>
-        <div class='bc-package-layout__item-thumbnail' :style='{ backgroundImage: "url(" + require(`@/assets/images/${item.thumbnail}`) + ")" }'></div>
+        <div class='bc-package-layout__item-thumbnail' :style='{ backgroundImage: `url(${item.BackgroundUrl})` }'></div>
         <div class='bc-package-layout__item-content'>
           <div class='bc-package-layout__item-info'>
-            <a href='javascript:void(0);' class='bc-package-layout__item-title'>{{ item.title }}</a>
-            <div class='bc-package-layout__item-size'>{{ item.size }}</div>
-            <div class='bc-package-layout__item-description'>{{ item.description }}</div>
+            <a href='javascript:void(0);' class='bc-package-layout__item-title'>{{ item.Title }}</a>
+            <div class='bc-package-layout__item-size'>{{ item.Size }}</div>
+            <div class='bc-package-layout__item-description'>{{ item.Description }}</div>
           </div>
           <div class='bc-package-layout__item-action'>
-            <button class='bc-package-layout__item-button bc-button bc-button--default' @click.stop='addToDownloadBox(item.id, item.type)'>
+            <button class='bc-package-layout__item-button bc-button bc-button--default' @click.stop='addToDownloadBox(item.Id, item.Type)'>
               <Icon class='bc-button__icon btn-add-item' name='add-to-download' />
               <span class='bc-button__text'>Add to download</span>
             </button>
@@ -67,34 +67,28 @@ export default {
 @import './../../assets/scss/base/variables';
 
 .bc-package-layout {
-  display: grid;
-  grid-gap: 1.5rem;
-  grid-template-areas: "a a a b"
-                       "a a a b"
-                       "c d e f";
+  display: flex;
+  flex-wrap: wrap;
+  margin: -0.75rem;
   @media screen and (max-width: $width-HD) {
-    grid-gap: 1rem;
-  }
-  @media screen and (max-width: $height-iPad) {
-    grid-template-areas: "a b"
-                         "c d"
-                         "e f";
-  }
-  @media screen and (max-width: $iPhone4-landscape) {
-    grid-template-areas: "a"
-                           "b"
-                           "c"
-                           "d"
-                           "e"
-                           "f";
+    margin: -0.5rem;
   }
   &__item {
     position: relative;
     overflow: hidden;
     border-radius: 0.5rem;
     height: 30rem;
+    flex: 1 0 auto;
+    margin: 0.75rem;
     @media screen and (max-width: $width-HD) {
       height: 25rem;
+      margin: 0.5rem;
+    }
+    @media screen and (max-width: $height-iPad) {
+      flex-basis: calc(50% - 1rem);
+    }
+    @media screen and (max-width: $iPhone4-landscape) {
+      flex-basis: calc(100% - 1rem);
     }
     &:before {
       position: absolute;
@@ -110,7 +104,16 @@ export default {
       display: none;
     }
     &:nth-child(1) {
-      grid-area: a;
+      flex-basis: calc(75% - 1.5rem);
+      @media screen and (max-width: $width-HD) {
+        flex-basis: calc(75% - 1rem);
+      }
+      @media screen and (max-width: $height-iPad) {
+        flex-basis: calc(50% - 1rem);
+      }
+      @media screen and (max-width: $iPhone4-landscape) {
+        flex-basis: calc(100% - 1rem);
+      }
       .bc-package-layout {
         &__item {
           &-content {
@@ -135,7 +138,16 @@ export default {
       }
     }
     &:nth-child(2) {
-      grid-area: b;
+      flex-basis: calc(25% - 1.5rem);
+      @media screen and (max-width: $width-HD) {
+        flex-basis: calc(25% - 1rem);
+      }
+      @media screen and (max-width: $height-iPad) {
+        flex-basis: calc(50% - 1rem);
+      }
+      @media screen and (max-width: $iPhone4-landscape) {
+        flex-basis: calc(100% - 1rem);
+      }
       .bc-package-layout {
         &__item {
           &-content {
@@ -170,18 +182,6 @@ export default {
           }
         }
       }
-    }
-    &:nth-child(3) {
-      grid-area: c;
-    }
-    &:nth-child(4) {
-      grid-area: d;
-    }
-    &:nth-child(5) {
-      grid-area: e;
-    }
-    &:nth-child(6) {
-      grid-area: f;
     }
     &:nth-child(n + 2) {
       .bc-button {
