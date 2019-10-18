@@ -296,6 +296,7 @@ export const packages = [
 export const files = [
   {
     id: '1',
+    FileId: '1',
     title: 'File 1',
     size: '2.3 Mb',
     type: 'photo',
@@ -308,6 +309,7 @@ export const files = [
   },
   {
     id: '2',
+    FileId: '2',
     title: 'File 2',
     size: '2.3 Mb',
     type: 'word',
@@ -320,6 +322,7 @@ export const files = [
   },
   {
     id: '3',
+    FileId: '3',
     title: 'File 3',
     size: '2.3 Mb',
     type: 'ppt',
@@ -332,6 +335,7 @@ export const files = [
   },
   {
     id: '4',
+    FileId: '4',
     title: 'File 4',
     size: '2.3 Mb',
     type: 'excel',
@@ -344,6 +348,7 @@ export const files = [
   },
   {
     id: '5',
+    FileId: '5',
     title: 'File 5',
     size: '2.3 Mb',
     type: 'pdf',
@@ -356,6 +361,7 @@ export const files = [
   },
   {
     id: '6',
+    FileId: '6',
     title: 'File 6',
     size: '2.3 Mb',
     type: 'excel',
@@ -368,6 +374,7 @@ export const files = [
   },
   {
     id: '7',
+    FileId: '7',
     title: 'File 7',
     size: '2.3 Mb',
     type: 'ppt',
@@ -380,6 +387,7 @@ export const files = [
   },
   {
     id: '8',
+    FileId: '8',
     title: 'File 8',
     size: '2.3 Mb',
     type: 'video',

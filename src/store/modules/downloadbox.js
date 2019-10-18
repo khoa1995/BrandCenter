@@ -1,6 +1,4 @@
 import {
-  LOAD_FILES,
-  LOAD_PACKAGES,
   ADD_ITEM_TO_BOX,
   REMOVE_ITEM_FROM_BOX,
   SET_DOWNLOAD_BOX,
@@ -11,10 +9,7 @@ import {
   DOWNLOAD_BOX
 } from './../localforage-keys'
 import localforage from 'localforage'
-
 const state = {
-  files: [],
-  packages: [],
   addedItems: []
 }
 
@@ -29,34 +24,14 @@ const mutations = {
 
   [SET_DOWNLOAD_BOX] (state, payload) {
     state.addedItems = payload
-  },
-
-  [LOAD_FILES] (state, payload) {
-    state.files = payload
-  },
-
-  [LOAD_PACKAGES] (state, payload) {
-    state.packages = payload
   }
 }
 
 const actions = {
-  [LOAD_FILES] ({ commit }, payload) {
-    commit(LOAD_FILES, payload)
-  },
-
-  [LOAD_PACKAGES] ({ commit }, payload) {
-    commit(LOAD_PACKAGES, payload)
-  },
-
-  // [SET_DOWNLOAD_BOX] ({ commit }, payload) {
-  //   commit(SET_DOWNLOAD_BOX, payload);
-  // },
-
   async [SET_DOWNLOAD_BOX_FROM_CACHE] ({ commit }) {
     try {
       let cache = await localforage.getItem(DOWNLOAD_BOX)
-      if(cache !== null){
+      if (cache !== null) {
         commit(SET_DOWNLOAD_BOX, cache)
       }
     } catch (e) {
@@ -64,23 +39,23 @@ const actions = {
     }
   },
 
-  [ADD_ITEM_TO_BOX] ({ dispatch, commit }, payload) {
+  [ADD_ITEM_TO_BOX] ({ dispatch, commit, rootState }, payload) {
     var index = state.addedItems.findIndex(x => x.id === payload.id && x.type === payload.type)
     if (index >= 0) {
       console.log('Item is added')
     } else {
       let selected = null
       if (payload.type === 'package') {
-        selected = state.packages.find(x => x.id === payload.id)
+        selected = rootState.packages.packageList.find(x => x.Id === payload.id)
       } else {
-        selected = state.files.find(x => x.id === payload.id)
+        selected = rootState.files.recentFiles.find(x => x.BrandFileId === payload.id)
       }
-      if (selected !== null) {
+      if (selected) {
         var item = {
-          id: selected.id,
-          type: selected.type,
-          name: selected.title,
-          size: selected.size
+          Id: selected.Id,
+          Type: payload.type,
+          Name: selected.Title,
+          Size: selected.Size
         }
         commit(ADD_ITEM_TO_BOX, item)
         CacheDownloadBox()
@@ -90,7 +65,7 @@ const actions = {
   },
 
   [REMOVE_ITEM_FROM_BOX] ({ commit }, payload) {
-    var index = state.addedItems.findIndex(x => x.id === payload)
+    var index = state.addedItems.findIndex(x => x.Id === payload)
     if (index >= 0) {
       commit(REMOVE_ITEM_FROM_BOX, index)
       CacheDownloadBox()

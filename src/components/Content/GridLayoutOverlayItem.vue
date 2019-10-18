@@ -3,11 +3,11 @@
     <div class='bc-grid-layout__item-thumbnail' :style='{ backgroundImage: "url(" + require(`@/assets/images/${item.thumbnail}`) + ")" }'></div>
     <div class='bc-grid-layout__item-content'>
       <div class='bc-grid-layout__item-info'>
-        <a href='javascript:void(0);' class='bc-grid-layout__item-title'>{{ item.title }}</a>
-        <div class='bc-grid-layout__item-size'>{{ item.size }}</div>
+        <a href='javascript:void(0);' class='bc-grid-layout__item-title'>{{ item.Title }}</a>
+        <div class='bc-grid-layout__item-size'>{{ item.Size }}</div>
       </div>
       <div class='bc-grid-layout__item-action'>
-        <button class='bc-grid-layout__item-button bc-button bc-button--default' @click.stop="addItem(item.id, item.type)">
+        <button class='bc-grid-layout__item-button bc-button bc-button--default' @click.stop="addToDownloadBox(item.BrandFileId)">
           <Icon class='bc-button__icon btn-add-item' name='add-to-download'/>
         </button>
         <button class='bc-grid-layout__item-button bc-button bc-button--light'>
@@ -37,8 +37,8 @@ export default {
     ...mapActions({
       _addFileToDownloadBox: `downloadbox/${ADD_ITEM_TO_BOX}`
     }),
-    addItem (id, type) {
-      this._addFileToDownloadBox({ id: id, type: type })
+    addToDownloadBox (id) {
+      this._addFileToDownloadBox({ id: id, type: 'file' })
     }
   }
 }
@@ -93,8 +93,8 @@ export default {
       color: $color-white;
       font-weight: 700;
       font-size: 1rem;
-      max-height: calc(1rem * #{$line-height} * 2);
       overflow: hidden;
+      max-height: calc(1rem * #{$line-height} * 2);
       display: inline-flex;
       &:hover {
         color: adjust-color($color-white, $lightness: -15%);

@@ -2,7 +2,7 @@
   <div class="detail-wrapper">
     <div class="detail-wrapper__header">
       <DetailHeader />
-      <ControllButtons isInDetail />
+      <ControlButtons isInDetail />
     </div>
     <DetailBanner isInPreview />
     <DetailContent />
@@ -20,7 +20,7 @@ export default {
     DetailBanner: () => import(/* webpackChunkName: "Banner" */ './Banner.vue'),
     DetailContent: () => import(/* webpackChunkName: "DetailContent" */ './Content.vue'),
     DetailRelated: () => import(/* webpackChunkName: "RelatedFiles" */ './RelatedFiles.vue'),
-    ControllButtons: () => import(/* webpackChunkName: "ListAction" */ '@/components/Content/ListAction.vue')
+    ControlButtons: () => import(/* webpackChunkName: "ListAction" */ '@/components/Content/ListAction.vue')
   },
   data () {
     return {
@@ -34,7 +34,6 @@ export default {
 @import "./../../assets/scss/base/variables";
 
 .detail-wrapper {
-  padding: 0 2.5rem;
   &__header {
     display: grid;
     grid-template-columns: 1fr auto;

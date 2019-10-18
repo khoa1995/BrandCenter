@@ -7,6 +7,8 @@ import brand from './modules/brand'
 import category from './modules/category'
 import packages from './modules/packages'
 import files from './modules/files'
+import criteria from './modules/criteria'
+import suggestions from './modules/suggestions'
 
 Vue.use(Vuex)
 
@@ -18,6 +20,8 @@ export default new Vuex.Store({
     brand,
     category,
     packages,
-    files
+    files,
+    criteria,
+    suggestions
   }
 })

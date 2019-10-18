@@ -19,6 +19,11 @@ const routes = [
         component: lazyLoad('Detail')
       },
       {
+        path: 'search',
+        name: 'search',
+        component: lazyLoad('Search')
+      },
+      {
         path: 'demo-pdf',
         name: 'demo-pdf',
         component: lazyLoad('DemoPDF')

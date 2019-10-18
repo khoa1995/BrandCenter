@@ -1,13 +1,11 @@
 <template>
   <div :class="filterClass">
-    <div class="bc-title pull-left" v-if="!isInTemplate">Discover Mantu's content</div>
-    <div class="bc-title pull-left" v-else-if="isInTemplate">All Mantu template</div>
-    <div class="bc-title pull-left" v-else-if="isInPackage">All Mantu package</div>
+    <div class="bc-title pull-left" v-if="isShowTitle">Discover {{ seletedBrandName }}'s content</div>
     <div class="bc-filter__button clickable" @click="handleClickButton">
       <Icon class="bc-filter__button-icon" name="filter" />
       <span class="bc-filter__button-label">Filters</span>
     </div>
-    <LayoutSwitch />
+    <!-- <LayoutSwitch /> -->
     <div class="bc-filter__content">
       <BCFilterSelect :group="group" v-for="group in filterGroups" :key="group.id" @onSelectGroup="handleSelectGroup" @onSelectItem="handleSelectItem" @onClickOutside="handleClickOutsideGroup" />
     </div>
@@ -16,13 +14,20 @@
 
 <script>
 import { filterGroups } from '@/fakeData'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'bc-filter',
   components: {
     Icon: () => import(/* webpackChunkName: "Icon" */ '@/components/Icon/Icon.vue'),
-    LayoutSwitch: () => import(/* webpackChunkName: "LayoutSwitch" */ './LayoutSwitch.vue'),
+    // LayoutSwitch: () => import(/* webpackChunkName: "LayoutSwitch" */ './LayoutSwitch.vue'),
     BCFilterSelect: () => import(/* webpackChunkName: "BCFilterSelect" */ './BCFilterSelect.vue')
+  },
+  props: {
+    isShowTitle: {
+      type: Boolean,
+      default: true
+    }
   },
   data () {
     return {
@@ -30,17 +35,10 @@ export default {
       isOpen: false
     }
   },
-  props: {
-    isInTemplate: {
-      type: Boolean,
-      default: false
-    },
-    isInPackage: {
-      type: Boolean,
-      default: false
-    }
-  },
   computed: {
+    ...mapGetters({
+      seletedBrandName: 'brand/selectedBrandName'
+    }),
     filterClass () {
       return {
         'bc-filter': true,

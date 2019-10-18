@@ -8,7 +8,9 @@ import {
   UPDATE_SELECTED_BRAND,
   UPDATE_APP_STATE,
   GET_BRAND_ID_BY_SLUG,
-  UPDATE_BRAND_SLUG_STATE
+  UPDATE_BRAND_SLUG_STATE,
+  UPDATE_CATEGORY_CRITERIA,
+  UPDATE_SEARCH_QUERY_CRITERIA
 } from '@/store/action-types'
 
 Vue.use(Router)
@@ -80,8 +82,24 @@ const validateBrandSlug = (to, from, next) => {
   }
 }
 
+const getCriteriaFromUrl = to => {
+  let { category, categoryId, searchQuery } = to.query
+  // Update category criteria in store
+  if (category && categoryId) {
+    store.commit(`criteria/${UPDATE_CATEGORY_CRITERIA}`, {
+      Label: category,
+      Id: categoryId
+    })
+  }
+  // Update search query criteria in store
+  if (searchQuery) {
+    store.commit(`criteria/${UPDATE_SEARCH_QUERY_CRITERIA}`, searchQuery)
+  }
+}
+
 router.beforeEach((to, from, next) => {
   validateBrandSlug(to, from, next)
+  getCriteriaFromUrl(to)
   next()
 })
 

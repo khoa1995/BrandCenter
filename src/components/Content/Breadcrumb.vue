@@ -1,31 +1,34 @@
 <template>
   <div class="bc-breadcrumb">
-    <div class="bc-breadcrumb__branches">{{ selectedBrand }}</div>
+    <div class="bc-breadcrumb__branches">{{ selectedBrandName }}</div>
     <div class="bc-breadcrumb__direction">
       <Icon name="arrow-right" />
     </div>
-    <div class="bc-breadcrumb__name-choosen">Home</div>
+    <div class="bc-breadcrumb__name-choosen">{{ currentPage }}</div>
   </div>
 </template>
 
 <script>
-import { brandList } from '@/fakeData.js'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'bc-breadcrumb',
   components: {
     Icon: () => import(/* webpackChunkName: "Icon" */ '@/components/Icon/Icon.vue')
   },
+  props: {
+    currentPage: {
+      type: String
+    }
+  },
   data () {
     return {
-      brandList,
-      selectedBrandId: 'mantu'
     }
   },
   computed: {
-    selectedBrand () {
-      return this.brandList ? this.brandList.find(x => x.id === this.selectedBrandId).label : ''
-    }
+    ...mapGetters({
+      selectedBrandName: 'brand/selectedBrandName'
+    })
   }
 }
 </script>

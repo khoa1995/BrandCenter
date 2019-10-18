@@ -33,7 +33,6 @@ const actions = {
     try {
       let response = await getCategoryList()
       if (response && response.data.Status) {
-        console.log(response.data.Data)
         commit(UPDATE_CATEGORY_LIST, response.data.Data)
       } else {
         // Reject an error
@@ -53,7 +52,7 @@ const actions = {
   [HANDLE_SECONDARY_CATEGORY] ({ commit }, category) {
     commit(HANDLE_SECONDARY_CATEGORY, category)
   },
-  [HANDLE_THIRD_CATEGORY] ({ commit }, payload ) {
+  [HANDLE_THIRD_CATEGORY] ({ commit }, payload) {
     commit(HANDLE_THIRD_CATEGORY, payload)
   }
 }

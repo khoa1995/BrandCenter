@@ -1,0 +1,35 @@
+/*
+*  Custom Bootstarp Pagination components.
+*
+*  [Table of contents]
+*
+*  [&. Content / #key]
+*  [Let press Ctrl + f and type of paste the key, then press Enter to search the content]
+*
+*  Summary:
+*
+*  01. General
+*
+*/
+
+
+/*===================================
+=            01. General            =
+===================================*/
+
+.bc-pagination {
+  .page-link {
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+    font-size: 1.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}
+
+/*=====  End of 01. General  ======*/

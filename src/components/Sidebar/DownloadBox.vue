@@ -12,15 +12,15 @@
       <div class="bc-download-box__counter">{{ contentCounter }}</div>
       <div class="bc-download-box__list-wrapper">
         <div class="bc-download-box__list">
-          <div class="bc-download-box__item" v-for="item in addedItems" :key="item.id">
+          <div class="bc-download-box__item" v-for="item in addedItems" :key="item.Id">
             <div class="bc-download-box__item-icon">
               <Icon :name="`type-${item.type}`" />
             </div>
             <div class="bc-download-box__item-info">
-              <div class="bc-download-box__item-name">{{ item.name }}</div>
-              <div class="bc-download-box__item-size">{{ item.size }}</div>
+              <div class="bc-download-box__item-name">{{ item.Name }}</div>
+              <div class="bc-download-box__item-size">{{ item.Size }}</div>
             </div>
-            <div class="bc-download-box__item-remove clickable pull-right" @click="handleClickRemove(item.id, item.type)"></div>
+            <div class="bc-download-box__item-remove clickable pull-right" @click="handleClickRemove(item.Id, item.Type)"></div>
           </div>
         </div>
       </div>
@@ -96,7 +96,8 @@ export default {
     },
     handleClickOutside () {
       if (typeof event.target.className === 'string') {
-        if (!event.target.className.includes('bc-download-box') && !event.target.className.includes('btn-add-item')) {
+        if (!event.target.className.includes('bc-download-box') &&
+            !event.target.className.includes('btn-add-item')) {
           this.isOpenDownloadBox = false
         }
       }

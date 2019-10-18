@@ -1,6 +1,6 @@
 <template>
-  <div class="bc-brand-policy pull-right">
-    <a class="bc-button bc-button--secondary" :href="brandPolicyHref" target="_blank">Brand Policy</a>
+  <div class="bc-brand-policy pull-right" v-show="brandPolicyHref">
+    <a class="bc-button bc-button--secondary" :href="convertRelativeUrl(brandPolicyHref)" target="_blank">Brand Policy</a>
   </div>
 </template>
 

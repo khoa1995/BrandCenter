@@ -15,9 +15,8 @@
 </template>
 
 <script>
-import { files, packages } from '@/fakeData.js'
+import { files } from '@/fakeData.js'
 import { mapState, mapActions } from 'vuex'
-import { LOAD_FILES, LOAD_PACKAGES } from '@/store/action-types'
 
 export default {
   name: 'bc-template',
@@ -31,25 +30,21 @@ export default {
     GridLayout: () => import(/* webpackChunkName: "GridLayout" */ '@/components/Content/GridLayout'),
     Section: () => import(/* webpackChunkName: "Section" */ '@/components/Section/Section.vue'),
     ListLayout: () => import(/* webpackChunkName: "Listlayout" */ '@/components/Content/ListLayout'),
-    BCCriteria: () => import(/* webpackChunkName: "BCCriteria" */ '@/components/Content/./BCCriteria.vue')
+    BCCriteria: () => import(/* webpackChunkName: "BCCriteria" */ '@/components/Content/BCCriteria.vue')
   },
   computed: {
     ...mapState({
-      contentLayout: state => state.config.contentLayout,
-      files: state => state.downloadbox.files,
-      packages: state => state.downloadbox.packages
+      contentLayout: state => state.config.contentLayout
     })
   },
   methods: {
     ...mapActions({
-      _setFiles: `downloadbox/${LOAD_FILES}`,
-      _setPackages: `downloadbox/${LOAD_PACKAGES}`
     })
   },
-
-  created () {
-    this._setFiles(files)
-    this._setPackages(packages)
+  data () {
+    return {
+      files: files
+    }
   }
 }
 </script>

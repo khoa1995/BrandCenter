@@ -33,8 +33,15 @@ export default {
         .bc-theme-switch .bc-search-bar__icon {
           background-color: ${this.selectedBrandColor};
         }
-        .bc-theme-switch .bc-search-bar__input:focus {
+        .bc-theme-switch .bc-search-bar__input:focus,
+        .bc-theme-switch .bc-search-bar__input--active {
           border-bottom-color: ${this.selectedBrandColor};
+        }
+
+        /* Suggestion */
+        .bc-theme-switch .bc-search-suggestion__item:hover {
+          color: ${this.selectedBrandColor};
+          background-color: ${color.setAlpha(0.2).toString()};
         }
 
         /* Button */
@@ -85,7 +92,7 @@ export default {
           color: ${this.selectedBrandColor};
         }
 
-        /* Content Request */
+        /* Filter */
         .bc-theme-switch .bc-filter__button:hover {
           color: ${this.selectedBrandColor};
           background-color: ${color.setAlpha(0.2).toString()};
@@ -93,10 +100,31 @@ export default {
         .bc-theme-switch .bc-filter__button:hover .bc-filter__button-icon {
           color: ${this.selectedBrandColor};
         }
+        .bc-theme-switch .bc-filter--open .bc-filter__button {
+          color: ${this.selectedBrandColor};
+          background-color: ${color.setAlpha(0.2).toString()};
+        }
+        .bc-theme-switch .bc-filter--open .bc-filter__button-icon {
+          color: ${this.selectedBrandColor};
+        }
+        .bc-theme-switch .bc-filter__group-item:hover {
+          background-color: ${color.setAlpha(0.2).toString()};
+        }
+        .bc-theme-switch .bc-filter__group-item--selected {
+          background-color: ${this.selectedBrandColor};
+        }
+        .bc-theme-switch .bc-filter__group-item--selected:hover {
+          background-color: ${this.selectedBrandColor};
+        }
 
         /* Download Box */
         .bc-theme-switch .bc-download-box__item:hover {
           border-color: ${this.selectedBrandColor};
+        }
+
+        /* Grid Layout */
+        .bc-theme-switch .bc-grid-layout__item-title:hover {
+          color: ${this.selectedBrandColor};
         }
       `
     }

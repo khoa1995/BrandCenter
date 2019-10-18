@@ -12,6 +12,8 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import './assets/scss/main.scss'
 import './directives'
+import './filters'
+import './mixins'
 
 Vue.config.productionTip = false
 

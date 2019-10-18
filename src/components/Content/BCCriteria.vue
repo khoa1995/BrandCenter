@@ -1,97 +1,125 @@
 <template>
-  <div class="bc-criteria d-flex">
-      <div class="bc-criteria__item">
-        <div class="bc-criteria__item-close"></div>
-        <div class="bc-criteria__item-text">
-            <img class="bc-criteria__item-icon"/>
-            <span>Social</span>
-        </div>
-      </div>
-      <div class="bc-criteria__count">
-          <span class="bc-criteria__count-number">1</span>
-          <span>item(s) found</span>
-      </div>
+  <div class="bc-criteria" v-show="criteriaList.length > 0">
+    <div class="bc-criteria__item clickable" v-for="(item, idx) in criteriaList" :key="idx" @click="handleRemoveCriteria(item)">
+      <span class="bc-criteria__item-close"></span>
+      <span class="bc-criteria__item-text">{{ item.Label }}</span>
+    </div>
+    <div class="bc-criteria__count">
+      <span class="bc-criteria__count-number">{{ criteriaList.length }}</span>
+      <span class="bc-criteria__count-label">{{ counterLabel }}</span>
+    </div>
   </div>
 </template>
+
+<script>
+import { mapGetters, mapActions } from 'vuex'
+import {
+  UPDATE_CATEGORY_CRITERIA,
+  UPDATE_SEARCH_QUERY_CRITERIA
+} from '@/store/action-types'
+
+export default {
+  name: 'bc-criteria',
+  data () {
+    return {
+    }
+  },
+  computed: {
+    ...mapGetters({
+      criteriaList: 'criteria/criteriaList'
+    }),
+    counterLabel () {
+      return `item${this.criteriaList.length > 1 ? 's' : ''} found`
+    }
+  },
+  methods: {
+    ...mapActions({
+      _updateCategoryCriteria: `criteria/${UPDATE_CATEGORY_CRITERIA}`,
+      _updateSearchQueryCriteria: `criteria/${UPDATE_SEARCH_QUERY_CRITERIA}`
+    }),
+    handleRemoveCriteria (item) {
+      // If category
+      if (item.type === 'category') {
+        this._updateCategoryCriteria({})
+      }
+      // If search query
+      if (item.type === 'search-query') {
+        this._updateSearchQueryCriteria('')
+      }
+    }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 @import './../../assets/scss/base/variables';
 
 .bc-criteria {
-    &__item {
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        color: #151515;
-        padding: 5px 20px;
-        margin-right: 10px;
-        margin-bottom: 10px;
-        -webkit-border-radius: 50px;
-        -moz-border-radius: 50px;
-        border-radius: 4px;
-        background-color: $color-border;
-        -webkit-transition: all 0.3s ease;
-        -moz-transition: all 0.3s ease;
-        transition: all 0.3s ease;
-        &-close {
-            position: relative;
-            top: -2px;
-            width: 13px;
-            height: 13px;
-
-            &::before {
-                top: 50%;
-                left: 0;
-                -webkit-transform: rotate(45deg);
-                -moz-transform: rotate(45deg);
-                transform: rotate(45deg);
-            }
-            &::after {
-                top: 50%;
-                left: 0;
-                -webkit-transform: rotate(-45deg);
-                -moz-transform: rotate(-45deg);
-                transform: rotate(-45deg);
-            }
-            &::before, &::after {
-                position: absolute;
-                content: '';
-                width: 15px;
-                height: 2px;
-                background-color: $color-black;
-                -webkit-border-radius: 3px;
-                -moz-border-radius: 3px;
-                border-radius: 3px;
-                -webkit-transition: all 0.5s ease;
-                -moz-transition: all 0.5s ease;
-                transition: all 0.5s ease;
-            }
-        }
-        &-text {
-            font-size: 1rem;
-            margin-left: 10px;
-        }
-        &:hover {
-            color: $color-white;
-            background-color: adjust-color($color-video, $lightness: 10%);;
-            .bc-criteria__item-close {
-                &::before, &::after {
-                    background-color: $color-white;
-                    -webkit-transform: none;
-                    -moz-transform: none;
-                    transform: none;
-                }
-            }
-        }
+  display: flex;
+  margin-top: 0.75rem;
+  &__item {
+    display: flex;
+    align-items: center;
+    padding: 0.357rem 1.25rem;
+    margin-right: 0.625rem;
+    margin-bottom: 0.625rem;
+    border-radius: 0.25rem;
+    background-color: $color-border;
+    transition: all 0.3s ease;
+    &-close {
+      position: relative;
+      top: -0.125rem;
+      width: 0.875rem;
+      height: 0.875rem;
+      &:before {
+        top: 50%;
+        left: 0;
+        transform: rotate(45deg);
+      }
+      &::after {
+        top: 50%;
+        left: 0;
+        transform: rotate(-45deg);
+      }
+      &::before,
+      &::after {
+        position: absolute;
+        content: '';
+        width: 1rem;
+        height: 0.125rem;
+        border-radius: 0.25rem;
+        background-color: $color-black;
+        transition: all 0.5s ease;
+      }
     }
-    &__count {
-        &-number {
-            border-radius: 4px;
-            padding: 3px 15px;
-            margin-right: 5px;
-            background-color: $color-white;
-            display: inline-block;
-        }
+    &-text {
+      font-size: 1rem;
+      margin-left: 0.625rem;
     }
+    &:hover {
+      color: $color-white;
+      background-color: $color-red;
+      .bc-criteria__item-close {
+        &::before,
+        &::after {
+          transform: none;
+          background-color: $color-white;
+        }
+      }
+    }
+  }
+  &__count {
+    display: flex;
+    align-items: center;
+    height: 2rem;
+    &-number {
+      border-radius: 0.25rem;
+      padding: 0.25rem 1rem;
+      background-color: $color-white;
+    }
+    &-label {
+      margin-left: 0.375rem;
+    }
+  }
 }
 </style>

@@ -20,6 +20,12 @@ const getters = {
   selectedBrand (state) {
     return state.brandList.find(x => x.IsSelected)
   },
+  selectedBrandId (state, getters) {
+    return getters.selectedBrand ? getters.selectedBrand.BrandId : ''
+  },
+  selectedBrandName (state, getters) {
+    return getters.selectedBrand ? getters.selectedBrand.Name : ''
+  },
   selectedBrandColor (state, getters) {
     return getters.selectedBrand ? getters.selectedBrand.BrandColor : ''
   }
@@ -80,6 +86,12 @@ const actions = {
       let response = await getBrandIdBySlug(slug)
       if (response && response.data.Status) {
         return Promise.resolve(response)
+      } else {
+        // Make toast an error
+        dispatch(`toast/${MAKE_TOAST}`, {
+          title: response.data.Status,
+          variant: 'danger'
+        }, { root: true })
       }
     } catch (error) {
       // Make toast an error

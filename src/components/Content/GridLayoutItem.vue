@@ -1,10 +1,10 @@
 <template>
   <div class='bc-grid-layout__item'>
     <div class='bc-grid-layout__item-thumbnail-wrapper'>
-      <div class='bc-grid-layout__item-thumbnail' :style='{ backgroundImage: `url(http://localhost/BrandCenter/${item.ThumbnailUrl})` }'></div>
+      <div class='bc-grid-layout__item-thumbnail' :style='{ backgroundImage: `url(${convertRelativeUrl(item.ThumbnailUrl)})` }'></div>
       <!-- <Icon class='bc-grid-layout__item-thumbnail-icon' :name='`type-${item.type}`' v-show='!isInDetail' /> -->
       <div class='bc-grid-layout__item-action'>
-        <button class='bc-grid-layout__item-button bc-button bc-button--default' v-show='!isInDetail' @click.stop="addItem(item.FileId, item.type)">
+        <button class='bc-grid-layout__item-button bc-button bc-button--default' v-show='!isInDetail' @click.stop="addToDownloadBox(item.BrandFileId)">
           <Icon class='bc-button__icon btn-add-item' name='add-to-download'/>
         </button>
         <button class='bc-grid-layout__item-button bc-button bc-button--light'>
@@ -14,7 +14,7 @@
     </div>
     <div class='bc-grid-layout__item-content'>
       <div class='bc-grid-layout__item-icon'>
-        <Icon :name='`type-${item.type}`' />
+        <Icon :name='`type-${item.Type}`' />
       </div>
       <div class='bc-grid-layout__item-info'>
         <a href='javascript:void(0);' class='bc-grid-layout__item-title'>{{ item.Title }}</a>
@@ -47,8 +47,8 @@ export default {
     ...mapActions({
       _addFileToDownloadBox: `downloadbox/${ADD_ITEM_TO_BOX}`
     }),
-    addItem (id, type) {
-      this._addFileToDownloadBox({ id: id, type: type })
+    addToDownloadBox (id) {
+      this._addFileToDownloadBox({ id: id, type: 'file' })
     }
   }
 }
@@ -59,6 +59,7 @@ export default {
 
 .bc-grid-layout {
   &__item {
+    height: 100%;
     padding: 0.75rem;
     border-radius: 0.75rem;
     background-color: $color-white;
@@ -69,6 +70,7 @@ export default {
       border-radius: 0.625rem;
       background-size: cover;
       background-position: center;
+      background-color: $color-app-bg;
       &-wrapper {
         position: relative;
       }
@@ -107,9 +109,10 @@ export default {
       font-weight: 700;
       font-size: 1rem;
       color: $color-text;
-      max-height: calc(1rem * #{$line-height} * 2);
-      overflow: hidden;
+      // overflow: hidden;
+      // max-height: calc(1rem * #{$line-height} * 2);
       display: inline-flex;
+      word-break: break-word;
       transition: all 0.3s ease;
       &:hover {
         color: $color-mantu;

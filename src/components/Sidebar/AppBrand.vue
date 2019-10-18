@@ -26,7 +26,10 @@
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
 import {
-  UPDATE_SELECTED_BRAND
+  GET_PACKAGE_BY_BRAND,
+  UPDATE_SELECTED_BRAND,
+  UPDATE_CATEGORY_CRITERIA,
+  GET_RECENT_FILES
 } from '@/store/action-types'
 
 export default {
@@ -65,7 +68,10 @@ export default {
   },
   methods: {
     ...mapActions({
-      _updateSelectedBrand: `brand/${UPDATE_SELECTED_BRAND}`
+      _updateSelectedBrand: `brand/${UPDATE_SELECTED_BRAND}`,
+      _updateCategoryCriteria: `criteria/${UPDATE_CATEGORY_CRITERIA}`,
+      _getPackageByBrand: `packages/${GET_PACKAGE_BY_BRAND}`,
+      _getRecentFiles: `files/${GET_RECENT_FILES}`
     }),
     handleClickButton () {
       // Open dropdown
@@ -76,6 +82,14 @@ export default {
       this._updateSelectedBrand(id)
       // Update slug
       this.$router.replace({ params: { brandSlug: this.selectedBrand.Slug } })
+      // Clear category criteria
+      this._updateCategoryCriteria({
+        isFromOtherPage: true
+      })
+      // Reload packages by selected brand
+      this._getPackageByBrand(id)
+      // Reload recent files base in selected brand
+      this._getRecentFiles(id)
       // Hide dropdown
       this.isDropdown = false
     },

@@ -36,7 +36,8 @@ import {
   GET_CATEGORY_LIST,
   HANDLE_SECONDARY_CATEGORY,
   HANDLE_THIRD_CATEGORY,
-  UPDATE_SIDEBAR_STATE
+  UPDATE_SIDEBAR_STATE,
+  UPDATE_CATEGORY_CRITERIA
 } from '@/store/action-types'
 
 export default {
@@ -54,10 +55,13 @@ export default {
       _getCategoryList: `category/${GET_CATEGORY_LIST}`,
       _handleSecondaryCategory: `category/${HANDLE_SECONDARY_CATEGORY}`,
       _handleThirdCategory: `category/${HANDLE_THIRD_CATEGORY}`,
-      _updateSidebarState: `config/${UPDATE_SIDEBAR_STATE}`
+      _updateSidebarState: `config/${UPDATE_SIDEBAR_STATE}`,
+      _updateCategoryCriteria: `criteria/${UPDATE_CATEGORY_CRITERIA}`
     }),
     handleClickLink (item) {
-      this.$router.push({ name: 'template' })
+      // Update category criteria & url
+      this._updateCategoryCriteria(item)
+      // Hide sidebar on mobile
       this._updateSidebarState(false)
     },
     handleOpenSecondCategory (category) {

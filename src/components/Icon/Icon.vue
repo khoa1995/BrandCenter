@@ -89,6 +89,7 @@ export default {
 <style lang="scss" scoped>
 
 .bc-icon {
+  pointer-events: none;
   /deep/ svg {
     pointer-events: none;
   }

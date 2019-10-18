@@ -2,7 +2,7 @@
   <div class='bc-package-layout'>
     <div class='bc-package-layout__item' v-for='item in contentData' :key="`package_${item.Id}`" @click="modalPreview=!modalPreview">
       <template>
-        <div class='bc-package-layout__item-thumbnail' :style='{ backgroundImage: `url(${item.BackgroundUrl})` }'></div>
+        <div class='bc-package-layout__item-thumbnail' :style='{ backgroundImage: `url(${convertRelativeUrl(item.BackgroundUrl)})` }'></div>
         <div class='bc-package-layout__item-content'>
           <div class='bc-package-layout__item-info'>
             <a href='javascript:void(0);' class='bc-package-layout__item-title'>{{ item.Title }}</a>
@@ -10,7 +10,7 @@
             <div class='bc-package-layout__item-description'>{{ item.Description }}</div>
           </div>
           <div class='bc-package-layout__item-action'>
-            <button class='bc-package-layout__item-button bc-button bc-button--default' @click.stop='addToDownloadBox(item.Id, item.Type)'>
+            <button class='bc-package-layout__item-button bc-button bc-button--default' @click.stop='addToDownloadBox(item.Id,)'>
               <Icon class='bc-button__icon btn-add-item' name='add-to-download' />
               <span class='bc-button__text'>Add to download</span>
             </button>
@@ -57,7 +57,7 @@ export default {
       _addPackageToDownloadBox: `downloadbox/${ADD_ITEM_TO_BOX}`
     }),
     addToDownloadBox (id, type) {
-      this._addPackageToDownloadBox({ id: id, type: type })
+      this._addPackageToDownloadBox({ id: id, type: 'package' })
     }
   }
 }
